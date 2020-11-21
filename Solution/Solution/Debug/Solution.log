@@ -1,5 +1,4 @@
 ﻿  Application.cpp
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\GitHub\PhasePortrait\Solution\Debug\vc120.pdb'; linking object as if no debug info
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SceneObject.h(71): warning C4715: 'SceneObject::AddBehaviour<CameraBehaviour>': not all control paths return a value
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SceneObject.h(71): warning C4715: 'SceneObject::AddBehaviour<ColoredCubeRenderer>': not all control paths return a value
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe
