@@ -1,4 +1,3 @@
 ﻿  Application.cpp
-D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SceneObject.h(71): warning C4715: 'SceneObject::AddBehaviour<CameraBehaviour>': not all control paths return a value
-D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SceneObject.h(71): warning C4715: 'SceneObject::AddBehaviour<ColoredCubeRenderer>': not all control paths return a value
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(22,28): warning C4305: 'initializing': truncation from 'double' to 'float'
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe

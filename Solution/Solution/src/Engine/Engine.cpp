@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "RendererBehaviour.h"
 #include "CameraBehaviour.h"
+#include "Input.h"
 
 #include <algorithm>
 #include <iostream>
@@ -15,6 +16,9 @@
 // Include GLM
 #include <glm/glm.hpp>
 using namespace glm;
+//#include "EngineLibrary.h"
+
+#include <iostream>
 
 // Time Counter
 #include <chrono> 
@@ -28,12 +32,14 @@ Engine::Engine(size_t windowWidth, size_t windowHeight)
 	deltaTime = 0;
 	unscaledDeltaTime = 0;
 	scene = new Scene(this);
+	input = nullptr;
 	window = nullptr;
 }
 
 Engine::~Engine()
 {
 	delete scene;
+	delete input;
 }
 
 int Engine::MainLoop()
@@ -54,6 +60,7 @@ int Engine::MainLoop()
 
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow(windowWidth, windowHeight, "Window", NULL, NULL);
+	input = new Input(window);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
@@ -136,6 +143,11 @@ double Engine::GetDeltaTime() const
 double Engine::GetUnscaledDeltaTime() const
 {
 	return unscaledDeltaTime;
+}
+
+Input* Engine::GetInput() const
+{
+	return input;
 }
 
 bool Engine::CloseWindow()

@@ -22,7 +22,7 @@ mat4 CameraBehaviour::GetProjectionViewMatrix() const
 	size_t height = engine->GetWindowHeight();
 	glm::mat4 Projection = glm::perspective(glm::radians(fieldOfView), width / (float)height, nearPlane, farPlane);
 
-	glm::mat4 rotationMatrix = glm::toMat4(glm::quat(sceneObject->transform.GetRotation()));
+	glm::mat4 rotationMatrix = sceneObject->transform.GetRotationMatrix();//glm::toMat4(glm::quat(sceneObject->transform.GetRotation()));
 	/*vec3 camPos = sceneObject->transform.GetPosition();
 	vec3 camForward = sceneObject->transform.GetForward();
 	vec3 camUp = sceneObject->transform.GetUp();

@@ -15,6 +15,8 @@ class CameraBehaviour;
 
 class RendererBehaviour;
 
+class Input;
+
 class Engine
 {
 private:
@@ -24,6 +26,7 @@ private:
 	double deltaTime;
 	double unscaledDeltaTime;
 	size_t windowWidth, windowHeight;
+	Input* input;
 
 	bool CloseWindow();
 public:
@@ -71,4 +74,6 @@ public:
 	size_t GetWindowHeight() const;
 	double GetDeltaTime() const;
 	double GetUnscaledDeltaTime() const;
+
+	Input* GetInput() const;
 };

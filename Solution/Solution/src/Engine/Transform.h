@@ -20,6 +20,8 @@ public:
 	void SetRotation(const vec3& newRotation);
 	void SetScale(const vec3& newScale);
 
+	void RotateAround(float angle, vec3 normal);
+
 	vec3 GetPosition() const;
 	vec3 GetRotation() const;
 	vec3 GetScale() const;
@@ -28,5 +30,6 @@ public:
 	vec3 GetUp() const;
 	vec3 GetRight() const;
 
+	mat4 GetRotationMatrix() const; 
 	mat4 GetModelMatrix() const;
 };

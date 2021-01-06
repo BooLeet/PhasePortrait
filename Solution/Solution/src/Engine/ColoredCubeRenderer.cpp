@@ -2,18 +2,22 @@
 
 #include <iostream>
 
-// Include GLEW
-#include <GL/glew.h>
+//// Include GLEW
+//#include <GL/glew.h>
+//
+//// Include GLFW
+//#include <GLFW/glfw3.h>
+//
+//// Include GLM
+//#include <glm/glm.hpp>
+//
 
-// Include GLFW
-#include <GLFW/glfw3.h>
-
-// Include GLM
-#include <glm/glm.hpp>
+//#include "SceneObject.h"
+//#include "Engine.h"
+//#include "Input.h"
 
 #include "ShaderLoader.h"
-#include "SceneObject.h"
-#include "Engine.h"
+#include "EngineLibrary.h"
 
 void ColoredCubeRenderer::Start()
 {
@@ -163,9 +167,30 @@ void ColoredCubeRenderer::Render(mat4 projectionViewMatrix)
 
 void ColoredCubeRenderer::Update()
 {
+	//sceneObject->transform.RotateAround(2 * engine->GetDeltaTime(), vec3(0, 1, 0));
 	vec3 rotation = sceneObject->transform.GetRotation();
-	rotation.x += 2 * engine->GetDeltaTime();
+	vec3 position = sceneObject->transform.GetPosition();
+	//rotation.z += 2 * engine->GetDeltaTime();
+
+	/*Input* input = engine->GetInput();
+	if (input->GetKey(GLFW_KEY_Q))
+		rotation.y += 2 * engine->GetDeltaTime();
+	if (input->GetKey(GLFW_KEY_E))
+		rotation.y -= 2 * engine->GetDeltaTime();
+
+	if (input->GetKey(GLFW_KEY_R))
+		rotation.x += 2 * engine->GetDeltaTime();
+	if (input->GetKey(GLFW_KEY_F))
+		rotation.x -= 2 * engine->GetDeltaTime();
+
+	if (input->GetKey(GLFW_KEY_W))
+		position += mat3(engine->GetDeltaTime()) * sceneObject->transform.GetForward();
+
+	if (input->GetKey(GLFW_KEY_S))
+		position -= mat3(engine->GetDeltaTime()) * sceneObject->transform.GetForward();
+
 	sceneObject->transform.SetRotation(rotation);
+	sceneObject->transform.SetPosition(position);*/
 }
 
 void ColoredCubeRenderer::OnDestroy()

@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Input.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Engine\CameraBehaviour.cpp" />
     <ClCompile Include="src\Engine\ColoredCubeRenderer.cpp" />
@@ -139,9 +140,14 @@
     <ClCompile Include="src\Engine\RendererBehaviour.cpp" />
     <ClCompile Include="src\Engine\Scene.cpp" />
     <ClCompile Include="src\Engine\SceneObject.cpp" />
+    <ClCompile Include="src\Engine\ShaderLoader.cpp" />
+    <ClCompile Include="src\Engine\SphericalCoordinateBehaviour.cpp" />
     <ClCompile Include="src\Engine\Transform.cpp" />
+    <ClCompile Include="src\TrailRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\EngineLibrary.h" />
+    <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Copypasted.h" />
     <ClInclude Include="src\Engine\CameraBehaviour.h" />
     <ClInclude Include="src\Engine\ColoredCubeRenderer.h" />
@@ -151,7 +157,9 @@
     <ClInclude Include="src\Engine\Scene.h" />
     <ClInclude Include="src\Engine\SceneObject.h" />
     <ClInclude Include="src\Engine\ShaderLoader.h" />
+    <ClInclude Include="src\Engine\SphericalCoordinateBehaviour.h" />
     <ClInclude Include="src\Engine\Transform.h" />
+    <ClInclude Include="src\TrailRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

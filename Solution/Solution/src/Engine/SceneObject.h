@@ -68,6 +68,8 @@ public:
 		ObjectBehaviour* newBehaviour = new T();
 		newBehaviour->ValidateBehaviour(this);
 		behaviours.push_back(newBehaviour);
+
+		return (T*)newBehaviour;
 	}
 
 	// Finds and removes a behaviour of type T
