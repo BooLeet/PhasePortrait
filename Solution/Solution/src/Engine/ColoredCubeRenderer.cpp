@@ -1,38 +1,16 @@
 #include "ColoredCubeRenderer.h"
 
 #include <iostream>
-
-//// Include GLEW
-//#include <GL/glew.h>
-//
-//// Include GLFW
-//#include <GLFW/glfw3.h>
-//
-//// Include GLM
-//#include <glm/glm.hpp>
-//
-
-//#include "SceneObject.h"
-//#include "Engine.h"
-//#include "Input.h"
+#include <vector>
 
 #include "ShaderLoader.h"
 #include "EngineLibrary.h"
+#include "Mesh.h"
 
 void ColoredCubeRenderer::Start()
 {
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
-	// Create and compile our GLSL program from the shaders
 	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
-
-	// Get a handle for our "MVP" uniform
-	MatrixID = glGetUniformLocation(programID, "MVP");
-
-	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
-	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-	static const GLfloat g_vertex_buffer_data[] = {
+	std::vector<GLfloat> vertexData = {
 		-1.0f,-1.0f,-1.0f,
 		-1.0f,-1.0f, 1.0f,
 		-1.0f, 1.0f, 1.0f,
@@ -71,8 +49,7 @@ void ColoredCubeRenderer::Start()
 		 1.0f,-1.0f, 1.0f
 	};
 
-	// One color for each vertex. They were generated randomly.
-	static const GLfloat g_color_buffer_data[] = {
+	std::vector<GLfloat> colorData = {
 		0.583f,  0.771f,  0.014f,
 		0.609f,  0.115f,  0.436f,
 		0.327f,  0.483f,  0.844f,
@@ -110,94 +87,20 @@ void ColoredCubeRenderer::Start()
 		0.820f,  0.883f,  0.371f,
 		0.982f,  0.099f,  0.879f
 	};
-
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &colorbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-
+	meshToDraw = new Mesh(vertexData, colorData, programID, GL_TRIANGLES);
 }
 
 void ColoredCubeRenderer::Render(mat4 projectionViewMatrix)
 {
-	glUseProgram(programID);
-
-	// Model matrix
-	glm::mat4 Model = sceneObject->transform.GetModelMatrix(); //glm::translate(glm::mat4(1.0), glm::vec3(3, 1, 5));;
-
-	glm::mat4 MVP = projectionViewMatrix * Model;
-
-	// Send our transformation to the currently bound shader, 
-	// in the "MVP" uniform
-	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
-	// 1rst attribute buffer : vertices
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glVertexAttribPointer(
-		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
-
-	// 2nd attribute buffer : colors
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glVertexAttribPointer(
-		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-		3,                                // size
-		GL_FLOAT,                         // type
-		GL_FALSE,                         // normalized?
-		0,                                // stride
-		(void*)0                          // array buffer offset
-	);
-
-	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
-
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
+	meshToDraw->Render(projectionViewMatrix, sceneObject->transform.GetModelMatrix());
 }
 
 void ColoredCubeRenderer::Update()
 {
-	//sceneObject->transform.RotateAround(2 * engine->GetDeltaTime(), vec3(0, 1, 0));
-	vec3 rotation = sceneObject->transform.GetRotation();
-	vec3 position = sceneObject->transform.GetPosition();
-	//rotation.z += 2 * engine->GetDeltaTime();
-
-	/*Input* input = engine->GetInput();
-	if (input->GetKey(GLFW_KEY_Q))
-		rotation.y += 2 * engine->GetDeltaTime();
-	if (input->GetKey(GLFW_KEY_E))
-		rotation.y -= 2 * engine->GetDeltaTime();
-
-	if (input->GetKey(GLFW_KEY_R))
-		rotation.x += 2 * engine->GetDeltaTime();
-	if (input->GetKey(GLFW_KEY_F))
-		rotation.x -= 2 * engine->GetDeltaTime();
-
-	if (input->GetKey(GLFW_KEY_W))
-		position += mat3(engine->GetDeltaTime()) * sceneObject->transform.GetForward();
-
-	if (input->GetKey(GLFW_KEY_S))
-		position -= mat3(engine->GetDeltaTime()) * sceneObject->transform.GetForward();
-
-	sceneObject->transform.SetRotation(rotation);
-	sceneObject->transform.SetPosition(position);*/
 }
 
 void ColoredCubeRenderer::OnDestroy()
 {
-	// Cleanup VBO and shader
-	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteBuffers(1, &colorbuffer);
+	delete meshToDraw;
 	glDeleteProgram(programID);
-	glDeleteVertexArrays(1, &VertexArrayID);
 }

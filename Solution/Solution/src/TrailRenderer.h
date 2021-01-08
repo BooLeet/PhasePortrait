@@ -10,9 +10,6 @@ private:
 
 	GLuint VertexArrayID = 0;
 	GLuint programID = 0;
-	GLuint MatrixID = 0;
-	GLuint vertexbuffer = 0;
-	GLuint colorbuffer = 0;
 
 	float sampleTimeCounter = 0;
 public:

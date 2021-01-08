@@ -40,20 +40,19 @@ int main(void)
 
 	SceneObject* coloredCube = engine.GetScene()->CreateObject("ColoredCube");
 	coloredCube->AddBehaviour<ColoredCubeRenderer>();
-	coloredCube->transform.SetRotation(vec3(0, 0, 0));
-	coloredCube->transform.SetPosition(vec3(0,0,0));
 	coloredCube->transform.SetScale(vec3(50, 50, 50));
 
-	/*SceneObject* coloredCube1 = engine.GetScene()->CreateObject("ColoredCube1");
+	SceneObject* coloredCube1 = engine.GetScene()->CreateObject("ColoredCube1");
 	coloredCube1->AddBehaviour<ColoredCubeRenderer>();
-	coloredCube1->transform.SetRotation(vec3(0, 0, 0));
-	coloredCube1->transform.SetPosition(vec3(0, 0, 0)); */
 
 	SceneObject* trailTest = engine.GetScene()->CreateObject("Trail");
 	TrailRenderer* trailRenderer = trailTest->AddBehaviour<TrailRenderer>();
-	trailRenderer->renderMode = TrailRenderer::RenderMode::Triangles;
-	trailTest->transform.SetRotation(vec3(0, 0, 0));
-	trailTest->transform.SetPosition(vec3(-18, 0, 0));
+	trailRenderer->renderMode = TrailRenderer::RenderMode::Lines;
+	
+	SceneObject* trailTest1 = engine.GetScene()->CreateObject("Trail");
+	TrailRenderer* trailRenderer1 = trailTest1->AddBehaviour<TrailRenderer>();
+	trailRenderer1->renderMode = TrailRenderer::RenderMode::Points;
+
 	
 
 	engine.MainLoop();

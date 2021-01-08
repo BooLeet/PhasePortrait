@@ -89,6 +89,9 @@ int Engine::MainLoop()
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
 
+	GLuint VertexArrayID = 0;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 
 	do 
 	{
@@ -107,6 +110,8 @@ int Engine::MainLoop()
 		auto duration = duration_cast<microseconds>(stop - start);
 		deltaTime = duration.count() * 0.000001;
 	} while (!CloseWindow());
+
+	glDeleteVertexArrays(1, &VertexArrayID);
 
 	// Cleanup VBO and shader
 	/*glDeleteBuffers(1, &vertexbuffer);
@@ -179,8 +184,7 @@ void Engine::CameraRegistry::RenderCameras(const Engine::RendererRegistry& rende
 	for (CameraBehaviour* camera : cameras)
 	{
 		mat4 projectionView = camera->GetProjectionViewMatrix();
-		for (size_t i = 0; i < rendererRegistry.Size(); ++i)
-			rendererRegistry[i]->Render(projectionView);
+		rendererRegistry.RenderAll(camera);
 	}
 }
 
@@ -206,7 +210,9 @@ void Engine::RendererRegistry::UnregisterRenderer(RendererBehaviour* renderer)
 
 void Engine::RendererRegistry::RenderAll(CameraBehaviour* camera) const
 {
-
+	mat4 projectionView = camera->GetProjectionViewMatrix();
+	for (size_t i = 0; i < Size(); ++i)
+		(*this)[i]->Render(projectionView);
 }
 
 RendererBehaviour* Engine::RendererRegistry::operator[](size_t index) const
