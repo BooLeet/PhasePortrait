@@ -29,31 +29,30 @@ using namespace std::chrono;
 #include "Engine/CameraBehaviour.h"
 #include "Engine/SphericalCoordinateBehaviour.h"
 #include "TrailRenderer.h"
+#include "PhaseFlow.h"
 
 int main(void)
 {
 	Engine engine = Engine(1280, 720);
 	SceneObject* camera = engine.GetScene()->CreateObject("Camera");
 	camera->AddBehaviour<CameraBehaviour>();
-	camera->AddBehaviour<SphericalCoordinateBehaviour>();
+	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 15;
 	camera->transform.SetPosition(vec3(0, 0, 0));
 
-	SceneObject* coloredCube = engine.GetScene()->CreateObject("ColoredCube");
+	/*SceneObject* coloredCube = engine.GetScene()->CreateObject("ColoredCube");
 	coloredCube->AddBehaviour<ColoredCubeRenderer>();
-	coloredCube->transform.SetScale(vec3(50, 50, 50));
+	coloredCube->transform.SetScale(vec3(50, 50, 50));*/
 
-	SceneObject* coloredCube1 = engine.GetScene()->CreateObject("ColoredCube1");
-	coloredCube1->AddBehaviour<ColoredCubeRenderer>();
-
-	SceneObject* trailTest = engine.GetScene()->CreateObject("Trail");
+	/*SceneObject* trailTest = engine.GetScene()->CreateObject("Trail");
 	TrailRenderer* trailRenderer = trailTest->AddBehaviour<TrailRenderer>();
-	trailRenderer->renderMode = TrailRenderer::RenderMode::Lines;
+	trailRenderer->renderMode = TrailRenderer::RenderMode::Lines;*/
 	
-	SceneObject* trailTest1 = engine.GetScene()->CreateObject("Trail");
-	TrailRenderer* trailRenderer1 = trailTest1->AddBehaviour<TrailRenderer>();
-	trailRenderer1->renderMode = TrailRenderer::RenderMode::Points;
+	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
+	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
+	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
+	phaseFlow->airResistance = 0.3;
 
-	
+	engine.timeScale = 1;
 
 	engine.MainLoop();
 }

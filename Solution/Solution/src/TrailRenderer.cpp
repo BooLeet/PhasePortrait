@@ -59,7 +59,6 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 		mode = GL_TRIANGLE_STRIP;
 
 	Mesh meshToDraw = Mesh(vertexData, colorData, programID, mode);
-	std::cout << "\nCOCK\n";
 	meshToDraw.Render(projectionViewMatrix, sceneObject->transform.GetModelMatrix());
 
 }
@@ -68,7 +67,7 @@ void TrailRenderer::Update()
 {
 	testAngle += 2 * engine->GetDeltaTime();
 
-	sceneObject->transform.SetPosition(((float)3) * vec3(cos(testAngle), sin(2 * testAngle), 0));
+	//sceneObject->transform.SetPosition(((float)3) * vec3(cos(testAngle), sin(2 * testAngle), 0));
 
 	if(samples.size() > 0)
 		samples.pop_front();

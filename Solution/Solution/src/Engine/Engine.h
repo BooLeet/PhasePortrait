@@ -22,7 +22,7 @@ class Engine
 private:
 	GLFWwindow* window;
 	Scene* scene;
-	double timeScale;
+	
 	double deltaTime;
 	double unscaledDeltaTime;
 	size_t windowWidth, windowHeight;
@@ -30,6 +30,8 @@ private:
 
 	bool CloseWindow();
 public:
+	double timeScale;
+
 	// Has references for all the renderers on the scene
 	class RendererRegistry
 	{

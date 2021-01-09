@@ -31,3 +31,8 @@ void ObjectBehaviour::TryLateUpdate()
 		return;
 	LateUpdate();
 }
+
+SceneObject* ObjectBehaviour::GetSceneObject()
+{
+	return sceneObject;
+}

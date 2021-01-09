@@ -1,3 +1,4 @@
 ﻿  Application.cpp
 D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(19,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\Application.cpp(53,32): warning C4305: '=': truncation from 'double' to 'float'
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe

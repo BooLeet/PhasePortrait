@@ -26,4 +26,6 @@ public:
 	void virtual Update() {};
 	void virtual LateUpdate() {};
 	void virtual OnDestroy() {};
+
+	SceneObject* GetSceneObject();
 };

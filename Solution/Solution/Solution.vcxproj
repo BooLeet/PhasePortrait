@@ -144,6 +144,7 @@
     <ClCompile Include="src\Engine\ShaderLoader.cpp" />
     <ClCompile Include="src\Engine\SphericalCoordinateBehaviour.cpp" />
     <ClCompile Include="src\Engine\Transform.cpp" />
+    <ClCompile Include="src\PhaseFlow.cpp" />
     <ClCompile Include="src\TrailRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="src\Engine\ShaderLoader.h" />
     <ClInclude Include="src\Engine\SphericalCoordinateBehaviour.h" />
     <ClInclude Include="src\Engine\Transform.h" />
+    <ClInclude Include="src\PhaseFlow.h" />
     <ClInclude Include="src\TrailRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
