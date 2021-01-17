@@ -23,7 +23,6 @@ private:
 	GLFWwindow* window;
 	Scene* scene;
 	
-	double deltaTime;
 	double unscaledDeltaTime;
 	size_t windowWidth, windowHeight;
 	Input* input;

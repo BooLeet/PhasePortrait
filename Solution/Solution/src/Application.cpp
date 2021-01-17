@@ -36,12 +36,12 @@ int main(void)
 	Engine engine = Engine(1280, 720);
 	SceneObject* camera = engine.GetScene()->CreateObject("Camera");
 	camera->AddBehaviour<CameraBehaviour>();
-	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 15;
+	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 10;
 	camera->transform.SetPosition(vec3(0, 0, 0));
 
 	/*SceneObject* coloredCube = engine.GetScene()->CreateObject("ColoredCube");
-	coloredCube->AddBehaviour<ColoredCubeRenderer>();
-	coloredCube->transform.SetScale(vec3(50, 50, 50));*/
+	coloredCube->AddBehaviour<ColoredCubeRenderer>();*/
+	//coloredCube->transform.SetScale(vec3(50, 50, 50));
 
 	/*SceneObject* trailTest = engine.GetScene()->CreateObject("Trail");
 	TrailRenderer* trailRenderer = trailTest->AddBehaviour<TrailRenderer>();
@@ -50,7 +50,9 @@ int main(void)
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
 	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
-	phaseFlow->airResistance = 0.3;
+	phaseFlow->airResistance = 0.9;
+	phaseFlow->g = 10;
+	
 
 	engine.timeScale = 1;
 

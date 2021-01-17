@@ -1,5 +1,4 @@
 #include "TrailRenderer.h"
-#include "Engine/ShaderLoader.h"
 
 #include "Engine/Mesh.h"
 #include <vector>
@@ -12,7 +11,7 @@ void PrintVec3(const vec3& vector)
 
 void TrailRenderer::Start()
 {
-	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
+	
 }
 
 void TrailRenderer::Render(mat4 projectionViewMatrix)
@@ -87,6 +86,6 @@ void TrailRenderer::OnDestroy()
 {
 	// Cleanup VBO and shader
 	
-	glDeleteProgram(programID);
+//	glDeleteProgram(programID);
 	//glDeleteVertexArrays(1, &VertexArrayID);
 }

@@ -32,6 +32,11 @@ void Transform::SetScale(const vec3& newScale)
 	this->scale = newScale;
 }
 
+void Transform::Translate(const vec3& delta)
+{
+	position = position + delta;
+}
+
 void Transform::RotateAround(float angle, vec3 normal)
 {
 	rotation = glm::rotate(rotation, angle, normal);

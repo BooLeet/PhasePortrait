@@ -20,6 +20,8 @@ public:
 	void SetRotation(const vec3& newRotation);
 	void SetScale(const vec3& newScale);
 
+	void Translate(const vec3& delta);
+
 	void RotateAround(float angle, vec3 normal);
 
 	vec3 GetPosition() const;

@@ -29,7 +29,6 @@ Engine::Engine(size_t windowWidth, size_t windowHeight)
 	this->windowWidth = windowWidth;
 	this->windowHeight = windowHeight;
 	timeScale = 1;
-	deltaTime = 0;
 	unscaledDeltaTime = 0;
 	scene = new Scene(this);
 	input = nullptr;
@@ -108,16 +107,14 @@ int Engine::MainLoop()
 
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
-		deltaTime = duration.count() * 0.000001;
+		unscaledDeltaTime = duration.count() * 0.000001;
+		std::cout << "FPS: " << 1 / unscaledDeltaTime << '\n';
+		// To prevent bugs caused by big lags
+		if (unscaledDeltaTime >= 0.05)
+			unscaledDeltaTime = 0.05;
 	} while (!CloseWindow());
 
 	glDeleteVertexArrays(1, &VertexArrayID);
-
-	// Cleanup VBO and shader
-	/*glDeleteBuffers(1, &vertexbuffer);
-	glDeleteBuffers(1, &colorbuffer);
-	glDeleteProgram(programID);
-	glDeleteVertexArrays(1, &VertexArrayID);*/
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
@@ -142,7 +139,7 @@ size_t Engine::GetWindowHeight() const
 
 double Engine::GetDeltaTime() const
 {
-	return deltaTime * timeScale;
+	return unscaledDeltaTime * timeScale;
 }
 
 double Engine::GetUnscaledDeltaTime() const

@@ -19,27 +19,27 @@ using namespace glm;
 void SphericalCoordinateBehaviour::Update()
 {
 	if (engine->GetInput()->GetKey(GLFW_KEY_RIGHT))
-		angleU += engine->GetDeltaTime();
+		angleU += engine->GetUnscaledDeltaTime();
 	if (engine->GetInput()->GetKey(GLFW_KEY_LEFT))
-		angleU -= engine->GetDeltaTime();
+		angleU -= engine->GetUnscaledDeltaTime();
 
 	if (engine->GetInput()->GetKey(GLFW_KEY_E))
-		angleW -= engine->GetDeltaTime();
+		angleW -= engine->GetUnscaledDeltaTime();
 	if (engine->GetInput()->GetKey(GLFW_KEY_Q))
-		angleW += engine->GetDeltaTime();
+		angleW += engine->GetUnscaledDeltaTime();
 
 	if (engine->GetInput()->GetKey(GLFW_KEY_UP))
-		angleV += engine->GetDeltaTime();
+		angleV += engine->GetUnscaledDeltaTime();
 	if (engine->GetInput()->GetKey(GLFW_KEY_DOWN))
-		angleV -= engine->GetDeltaTime();
+		angleV -= engine->GetUnscaledDeltaTime();
 
 	if (abs(angleV) >= pi<float>() / 2)
 		angleV = sign(angleV) * pi<float>() / 2;
 
 	if (engine->GetInput()->GetKey(GLFW_KEY_W))
-		distance -= 2 * engine->GetDeltaTime();
+		distance -= 2 * engine->GetUnscaledDeltaTime();
 	if (engine->GetInput()->GetKey(GLFW_KEY_S))
-		distance += 2 * engine->GetDeltaTime();
+		distance += 2 * engine->GetUnscaledDeltaTime();
 
 	vec3 rotation = vec3(-angleV, angleU, angleW);
 	vec3 position = vec3(distance * sin(angleU) * cos(angleV),
