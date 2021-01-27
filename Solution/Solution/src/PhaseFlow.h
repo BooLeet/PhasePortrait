@@ -9,10 +9,10 @@
 
 class PhaseFlow : public ObjectBehaviour
 {
-	size_t size = 22;
+	
 	float simulationRadius = 6.28;
 
-	size_t differentialEquationOrder = 2;
+	
 	std::vector<std::pair<TrailRenderer*, std::vector<float> >> phasePoints;
 	
 	size_t xDiffOrder = 0;
@@ -20,14 +20,17 @@ class PhaseFlow : public ObjectBehaviour
 	size_t zDiffOrder = 2;
 
 	std::map<std::string, function > calculatorFunctions;
+	std::vector<float>* currentPointForCalculation;
 
-private:
 	float CalculateDifferentialEquation(const std::vector<float>& point);
 
 	void CalculatorFunctionSetup();
-	std::vector<float> GetPhaseSpeedVector(const std::vector<float>& point);
+	std::vector<float> GetPhaseSpeedVector(std::vector<float>& point);
 	vec3 GetNewTrailPosition(const std::vector<float>& phasePosition);
 public:
+	size_t sampleSize = 22;
+	size_t differentialEquationOrder = 2;
+	expression rightSideExpression;
 	float airResistance = 0.5;
 	float g = 10;
 	float pendulumLength = 1;

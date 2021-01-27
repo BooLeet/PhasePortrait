@@ -1,0 +1,4 @@
+A*diff(2)+B*diff(1)+C*diff(0)
+A = 9
+B = -15
+C = -25

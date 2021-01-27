@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -50,10 +51,14 @@ int main(void)
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
 	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
-	phaseFlow->airResistance = 0.9;
-	phaseFlow->g = 10;
 	
+	std::string fileName = "Pend.txt";
+	std::ifstream file(fileName);
+	phaseFlow->rightSideExpression = ReadExpression(file);
 
+	phaseFlow->sampleSize = 30;
+	//phaseFlow->differentialEquationOrder = 3;
+	
 	engine.timeScale = 1;
 
 	engine.MainLoop();

@@ -1,5 +1,22 @@
-﻿  Application.cpp
+﻿  PhaseFlow.cpp
 D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(18,28): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(13,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\GitHub\PhasePortrait\Solution\Solution\src\Application.cpp(53,32): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(14,27): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(27,103): warning C4244: 'argument': conversion from 'double' to 'const unsigned int', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(84,41): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(89,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(89,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(89,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(89,55): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(89,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(92,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(92,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(92,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(92,55): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(92,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(95,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(95,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(95,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(95,55): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(95,55): warning C4244:         ]
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe

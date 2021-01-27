@@ -43,4 +43,4 @@ std::vector<Term> ConvertToPostfix(const std::vector<Term>& terms);
 expression ReadExpression(std::istream& stream);
 
 // Вычисление выражения по заданному выражению и ассоциативному массиву функций
-double EvaluateExpression(const expression& expr, std::map<std::string, function > functions);
+double EvaluateExpression(const expression& expr, std::map<std::string, function >& functions);

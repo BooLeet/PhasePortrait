@@ -192,7 +192,7 @@ expression ReadExpression(std::istream& stream)
 }
 
 // Вычисление выражения по заданному выражению и ассоциативному массиву функций
-double EvaluateExpression(const expression& expr, std::map<std::string, function > functions)
+double EvaluateExpression(const expression& expr,std::map<std::string, function >& functions)
 {
 	std::vector<Term> postfixTerms = ConvertToPostfix(ConvertToTerms(expr.first));
 	std::stack<double> stack;
