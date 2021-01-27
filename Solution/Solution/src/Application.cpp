@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
+#include <windows.h>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -52,15 +53,20 @@ int main(void)
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
 	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
 	
-	std::string fileName = "Pend.txt";
+	std::string fileName;
+	std::cout << "Enter the file name: ";
+	std::cin >> fileName;
+
 	std::ifstream file(fileName);
 	phaseFlow->rightSideExpression = ReadExpression(file);
 
-	phaseFlow->sampleSize = 30;
+	phaseFlow->sampleSize = 32;
 	//phaseFlow->differentialEquationOrder = 3;
 	
 	engine.timeScale = 1;
 
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 	engine.MainLoop();
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
 }
 

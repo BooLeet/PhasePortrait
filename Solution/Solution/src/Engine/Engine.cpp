@@ -108,7 +108,8 @@ int Engine::MainLoop()
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 		unscaledDeltaTime = duration.count() * 0.000001;
-		std::cout << "FPS: " << 1 / unscaledDeltaTime << '\n';
+		//std::cout << "FPS: " << 1 / unscaledDeltaTime << '\n';
+
 		// To prevent bugs caused by big lags
 		if (unscaledDeltaTime >= 0.05)
 			unscaledDeltaTime = 0.05;

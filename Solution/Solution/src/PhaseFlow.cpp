@@ -82,7 +82,7 @@ void PhaseFlow::Start()
 				trailRenderer->programID = programID;
 				trailRenderer->renderMode = renderMode;
 				trailRenderer->sampleLifeTime = 0.05;
-				trailRenderer->maxSamples = 5;
+				trailRenderer->maxSamples = 25;
 			
 				std::vector<float> phasePosition(differentialEquationOrder, 0);
 				if (differentialEquationOrder > xDiffOrder)
