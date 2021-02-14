@@ -33,7 +33,6 @@ using namespace std::chrono;
 #include "TrailRenderer.h"
 #include "PhaseFlow.h"
 #include "DifferentialEquation.h"
-#include "CoordinateSystemRenderer.h"
 
 int main(void)
 {
@@ -47,14 +46,21 @@ int main(void)
 	coloredCube->AddBehaviour<ColoredCubeRenderer>();*/
 	//coloredCube->transform.SetScale(vec3(50, 50, 50));
 
-	SceneObject* coordinateSystem = engine.GetScene()->CreateObject("Coordinate System");
+	/*SceneObject* coordinateSystem = engine.GetScene()->CreateObject("Coordinate System");
 	CoordinateSystemRenderer* coordinateRenderer = coordinateSystem->AddBehaviour<CoordinateSystemRenderer>();
 	coordinateRenderer->SetRadius(20);
-	coordinateRenderer->SetSegmentLength(1.5707963);
+	coordinateRenderer->SetSegmentLength(1.5707963);*/
 	
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
+
+	/*CoordinateSystemRenderer* coordinateRenderer = phaseFlowObj->AddBehaviour<CoordinateSystemRenderer>();
+	coordinateRenderer->SetRadius(20);
+	coordinateRenderer->SetSegmentLength(1.5707963);*/
+
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
 	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
+
+	
 	
 	std::string fileName;
 	std::cout << "Enter the file name: ";

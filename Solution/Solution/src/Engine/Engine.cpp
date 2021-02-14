@@ -93,6 +93,7 @@ int Engine::MainLoop()
 	// Setup style
 	//ImGui::StyleColorsDark();
 	ImGui::StyleColorsClassic();
+	//ImGui::StyleColorsLight();
 
 
 
@@ -241,7 +242,7 @@ void Engine::RendererRegistry::RenderAll(CameraBehaviour* camera) const
 {
 	mat4 projectionView = camera->GetProjectionViewMatrix();
 	for (size_t i = 0; i < Size(); ++i)
-		(*this)[i]->Render(projectionView);
+		(*this)[i]->TryRender(projectionView);
 }
 
 RendererBehaviour* Engine::RendererRegistry::operator[](size_t index) const

@@ -10,6 +10,8 @@ protected:
 	virtual void OnDestroyRenderer() {}
 
 public:
+	void TryRender(mat4 projectionViewMatrix);
+
 	virtual void Render(mat4 projectionViewMatrix) = 0;
 
 	void Awake();

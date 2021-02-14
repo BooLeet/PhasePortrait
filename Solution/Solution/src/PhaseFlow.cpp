@@ -11,6 +11,7 @@
 
 #include "ExpressionCalculator.h"
 #include "DifferentialEquation.h"
+#include "CoordinateSystemRenderer.h"
 
 
 #include <string>
@@ -76,12 +77,7 @@ vec3 PhaseFlow::GetNewTrailPosition(const std::vector<float>& phasePosition)
 
 void PhaseFlow::PhasePointsSetup()
 {
-	engine->ConsoleLog("PhasePointsSetup");
-
-	for (std::pair<TrailRenderer*, std::vector<float> > point : phasePoints)
-		point.first->GetSceneObject()->Destroy();
-
-	phasePoints.clear();
+	ClearPhasePoints();
 
 	size_t iSize = differentialEquation->GetOrder() >= 1 ? sampleSize : 0;
 	size_t jSize = differentialEquation->GetOrder() >= 2 ? sampleSize : 1;
@@ -112,24 +108,39 @@ void PhaseFlow::PhasePointsSetup()
 				obj->transform.SetPosition(GetNewTrailPosition(phasePosition));
 				phasePoints.push_back(std::pair<TrailRenderer*, std::vector<float> >(trailRenderer, phasePosition));
 			}
-	engine->ConsoleLog(std::to_string(engine->GetScene()->GetObjectCount()));
+}
+
+void PhaseFlow::ClearPhasePoints()
+{
+	for (std::pair<TrailRenderer*, std::vector<float> > point : phasePoints)
+		point.first->GetSceneObject()->Destroy();
+
+	phasePoints.clear();
 }
 
 void PhaseFlow::Start()
 {
 	CalculatorFunctionSetup();
 	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
+	coordinateRenderer = sceneObject->AddBehaviour<CoordinateSystemRenderer>();
+	coordinateRenderer->SetRadius(20);
+	coordinateRenderer->SetSegmentLength(1);
+	coordinateRenderer->SetSegmentNotchSize(0.1);
 }
 
 void PhaseFlow::Update()
 {
+	if (stopSimulation)
+	{
+		stopSimulation = false;
+		ClearPhasePoints();
+	}
+
 	if (startSimulation)
 	{
 		startSimulation = false;
 		PhasePointsSetup();
 	}
-
-	//if (engine->GetInput()->GetKey(GLFW_KEY_K))
 
 	for (std::pair<TrailRenderer*, std::vector<float> >& phasePoint : phasePoints)
 	{
@@ -140,23 +151,53 @@ void PhaseFlow::Update()
 		phasePoint.first->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(phasePoint.second));
 	}
 
+	ImGui::SetNextWindowPos(ImVec2(0, 0));
 	ImGui::Begin("Phase Flow Controls");
-	static float f = 1;
+	
+	ImGui::Text("%.1f FPS (%.3f ms)", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
+	ImGui::Text("Differential Equation:");
+
 	std::string expression = "diff(" + std::to_string(differentialEquation->GetOrder()) + ") = " + differentialEquation->rightSideExpression.GetString().c_str();
-	ImGui::Text(expression.c_str());                           // Display some text (you can use a format string too)
+	ImGui::Text(expression.c_str());
+
 	if (ImGui::Button("Start"))
 		startSimulation = true;
-	ImGui::SliderFloat("Time Scale", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f    
-	engine->timeScale = f;
 
-	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	if (ImGui::Button("Stop"))
+		stopSimulation = true;
+
+	static float timeScale = 1;
+	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f    
+	engine->timeScale = timeScale;
+
+
+	ImGui::Text("\nCoordinates:");
+
+	ImGui::Checkbox("Show coordinates", &(coordinateRenderer->enabled));
+
+	static float coordinateRadius = 20;
+	static float segmentLength = 1;
+	static float segmentNotchSize = 0.1;
+
+	if (coordinateRenderer->enabled)
+	{
+		if (ImGui::InputFloat("Radius", &coordinateRadius))
+			coordinateRenderer->SetRadius(coordinateRadius);
+
+
+		if (ImGui::InputFloat("Segment length", &segmentLength))
+			coordinateRenderer->SetSegmentLength(segmentLength);
+
+
+		if (ImGui::InputFloat("Segment notch size", &segmentNotchSize))
+			coordinateRenderer->SetSegmentNotchSize(segmentNotchSize);
+	}
 	ImGui::End();
 }
 
 void PhaseFlow::OnDestroy()
 {
-	for (std::pair<TrailRenderer*, std::vector<float> > point : phasePoints)
-		point.first->GetSceneObject()->Destroy();
+	ClearPhasePoints();
 	glDeleteProgram(programID);
 }
 

@@ -6,10 +6,12 @@
 #include <vector>
 
 class DifferentialEquation;
+class CoordinateSystemRenderer;
 
 class PhaseFlow : public ObjectBehaviour
 {
 	bool startSimulation = false;
+	bool stopSimulation = false;
 
 	float simulationRadius = 6.28;
 
@@ -25,6 +27,8 @@ class PhaseFlow : public ObjectBehaviour
 
 	DifferentialEquation* differentialEquation = nullptr;
 
+	CoordinateSystemRenderer* coordinateRenderer = nullptr;
+
 	// Вычисляет правую часть дифференциального уравнения для данной фазовой точки
 	float CalculateDifferentialEquation(std::vector<float>& point);
 
@@ -39,6 +43,9 @@ class PhaseFlow : public ObjectBehaviour
 	
 	// Удаляет предыдущие фазовые точки (если имеются) и создает новые
 	void PhasePointsSetup();
+
+	// Удаляет предыдущие фазовые точки
+	void ClearPhasePoints();
 public:
 	size_t sampleSize = 22;
 	

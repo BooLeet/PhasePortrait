@@ -27,5 +27,7 @@ public:
 
 	void SetSegmentLength(double newLength);
 
+	void SetSegmentNotchSize(double newSize);
+
 	void SetAxis(bool x, bool y, bool z);
 };

@@ -22,7 +22,17 @@ void CoordinateSystemRenderer::SetRadius(double newRadius)
 
 void CoordinateSystemRenderer::SetSegmentLength(double newLength)
 {
+	if (newLength == 0)
+		return;
+
 	segmentLength = newLength;
+	if (mesh != nullptr)
+		CreateMesh();
+}
+
+void CoordinateSystemRenderer::SetSegmentNotchSize(double newSize)
+{
+	segmentNotchSize = newSize;
 	if (mesh != nullptr)
 		CreateMesh();
 }
