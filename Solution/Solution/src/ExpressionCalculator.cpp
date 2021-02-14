@@ -9,7 +9,7 @@
 #include <fstream>
 #include <assert.h>
 
-Term::Term(std::string aName, TermType aType)
+Expression::Term::Term(std::string aName, TermType aType)
 {
 	name = aName;
 	type = aType;
@@ -30,14 +30,14 @@ double StackPopReturn(std::stack<double>& stack)
 }
 
 // Вывод термов на экран
-void PrintTerms(const std::vector<Term>& terms)
+void Expression::PrintTerms(const std::vector<Term>& terms)
 {
 	std::for_each(begin(terms), end(terms), [](Term n) {std::cout << n.name << ' '; });
 	std::cout << std::endl;
 }
 
 // Определение типа по символу
-TermType GetType(char c)
+Expression::TermType Expression::GetType(char c)
 {
 	if (c == ',')
 		return TermType::Comma;
@@ -58,7 +58,7 @@ TermType GetType(char c)
 }
 
 // Конвертация строки выражения в вектор термов
-std::vector<Term> ConvertToTerms(const std::string& expression)
+std::vector<Expression::Term> Expression::ConvertToTerms(const std::string& expression)
 {
 	std::vector<Term> result;
 
@@ -109,13 +109,13 @@ std::vector<Term> ConvertToTerms(const std::string& expression)
 }
 
 // Определение приоритета терма
-int TermPriority(const Term& type)
+int Expression::TermPriority(const Term& type)
 {
 	return priorities[type.name];
 }
 
 // Конвертация вектора терма в постфиксный вид
-std::vector<Term> ConvertToPostfix(const std::vector<Term>& terms)
+std::vector<Expression::Term> Expression::ConvertToPostfix(const std::vector<Term>& terms)
 {
 	std::stack<Term> termStack;
 	std::vector<Term> result;
@@ -156,7 +156,7 @@ std::vector<Term> ConvertToPostfix(const std::vector<Term>& terms)
 }
 
 // Чтение выбражения из потока
-expression ReadExpression(std::istream& stream)
+Expression::expression Expression::ReadExpressionFromStream(std::istream& stream)
 {
 	expression result;
 	std::map<std::string, double> variables;
@@ -191,10 +191,36 @@ expression ReadExpression(std::istream& stream)
 	return result;
 }
 
-// Вычисление выражения по заданному выражению и ассоциативному массиву функций
-double EvaluateExpression(const expression& expr,std::map<std::string, function >& functions)
+//// Вычисление выражения по заданному выражению и ассоциативному массиву функций
+//double EvaluateExpression(const expression& expr,std::map<std::string, function >& functions)
+//{
+//	std::vector<Term> postfixTerms = ConvertToPostfix(ConvertToTerms(expr.first));
+//	std::stack<double> stack;
+//
+//	for (size_t i = 0; i < postfixTerms.size(); ++i)
+//	{
+//		switch (postfixTerms[i].type)
+//		{
+//		case TermType::Variable: stack.push(expr.second.at(postfixTerms[i].name)); break;
+//		case TermType::Constant: stack.push(std::stod(postfixTerms[i].name)); break;
+//		case TermType::Operator: case TermType::Function:
+//			stack.push(functions[postfixTerms[i].name](stack));
+//		}
+//	}
+//	return stack.top();
+//}
+
+Expression Expression::ReadExpression(std::istream& stream)
 {
-	std::vector<Term> postfixTerms = ConvertToPostfix(ConvertToTerms(expr.first));
+	Expression result;
+	result.expr = ReadExpressionFromStream(stream);
+	result.postfixTerms = ConvertToPostfix(ConvertToTerms(result.expr.first));
+
+	return result;
+}
+
+double Expression::EvaluateExpression(std::map<std::string, function>& functions)
+{
 	std::stack<double> stack;
 
 	for (size_t i = 0; i < postfixTerms.size(); ++i)
@@ -208,4 +234,9 @@ double EvaluateExpression(const expression& expr,std::map<std::string, function 
 		}
 	}
 	return stack.top();
+}
+
+std::string Expression::GetString() const
+{
+	return expr.first;
 }

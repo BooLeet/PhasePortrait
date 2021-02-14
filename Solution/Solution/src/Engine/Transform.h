@@ -4,6 +4,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
+#include <string>
+
 class Transform
 {
 private:

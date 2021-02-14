@@ -8,5 +8,6 @@ void RendererBehaviour::Awake()
 
 void RendererBehaviour::OnDestroy()
 {
+	OnDestroyRenderer();
 	engine->rendererRegistry.UnregisterRenderer(this);
 }

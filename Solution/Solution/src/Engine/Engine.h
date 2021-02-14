@@ -9,6 +9,8 @@
 // Include GLFW
 #include <GLFW/glfw3.h>
 
+#include <string>
+
 class Scene;
 
 class CameraBehaviour;
@@ -77,4 +79,6 @@ public:
 	double GetUnscaledDeltaTime() const;
 
 	Input* GetInput() const;
+
+	void ConsoleLog(std::string str);
 };

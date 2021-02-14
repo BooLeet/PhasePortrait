@@ -1,5 +1,6 @@
 #include "SceneObject.h"
 #include "Scene.h"
+#include "Engine.h"
 #include "ObjectBehaviour.h"
 
 SceneObject::SceneObject(Scene* scene, std::string name)
@@ -23,6 +24,7 @@ SceneObject::~SceneObject()
 void SceneObject::RemoveBehaviour(const std::vector<ObjectBehaviour*>::iterator& iterator)
 {
 	(*iterator)->OnDestroy();
+	delete* iterator;
 	std::iter_swap(iterator, behaviours.end() - 1);
 	behaviours.pop_back();
 }

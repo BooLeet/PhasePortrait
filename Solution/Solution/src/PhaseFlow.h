@@ -5,14 +5,15 @@
 #include "ExpressionCalculator.h"
 #include <vector>
 
-//class TrailRenderer;
+class DifferentialEquation;
 
 class PhaseFlow : public ObjectBehaviour
 {
-	
+	bool startSimulation = false;
+
 	float simulationRadius = 6.28;
 
-	
+	GLuint programID;
 	std::vector<std::pair<TrailRenderer*, std::vector<float> >> phasePoints;
 	
 	size_t xDiffOrder = 0;
@@ -22,18 +23,25 @@ class PhaseFlow : public ObjectBehaviour
 	std::map<std::string, function > calculatorFunctions;
 	std::vector<float>* currentPointForCalculation;
 
-	float CalculateDifferentialEquation(const std::vector<float>& point);
+	DifferentialEquation* differentialEquation = nullptr;
 
+	// Вычисляет правую часть дифференциального уравнения для данной фазовой точки
+	float CalculateDifferentialEquation(std::vector<float>& point);
+
+	// Вносит необходимые функции для вычисления уравнений
 	void CalculatorFunctionSetup();
+
+	// Возвращает вектор скорости для данной фазовой точки
 	std::vector<float> GetPhaseSpeedVector(std::vector<float>& point);
+
+	// Возвращает новую позицию точки в зависимости от выбранных фазовых осей визуализации
 	vec3 GetNewTrailPosition(const std::vector<float>& phasePosition);
+	
+	// Удаляет предыдущие фазовые точки (если имеются) и создает новые
+	void PhasePointsSetup();
 public:
 	size_t sampleSize = 22;
-	size_t differentialEquationOrder = 2;
-	expression rightSideExpression;
-	float airResistance = 0.5;
-	float g = 10;
-	float pendulumLength = 1;
+	
 	TrailRenderer::RenderMode renderMode = TrailRenderer::RenderMode::Lines;
 
 	float simulationSpeed = 1;
@@ -42,4 +50,7 @@ public:
 	void Update();
 
 	void OnDestroy();
+
+	// Задание дифференциального уравнения
+	void SetDifferentialEquation(DifferentialEquation& differentialEquationReference);
 };

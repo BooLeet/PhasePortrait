@@ -1,0 +1,1 @@
+cos(diff(0))-cos(diff(1))

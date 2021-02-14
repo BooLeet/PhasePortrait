@@ -88,10 +88,6 @@ public:
 			return;
 
 		RemoveBehaviour(iterator);
-
-		/*(*iterator)->OnDestroy();
-		std::iter_swap(iterator, behaviours.end() - 1);
-		behaviours.pop_back();*/
 	}
 
 	// Calls Update and LateUpdate on all behaviours

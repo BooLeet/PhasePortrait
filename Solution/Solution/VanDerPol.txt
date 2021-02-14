@@ -1,2 +1,2 @@
 mu*(1-diff(0)*diff(0))*diff(1)-diff(0)
-mu = 0.5
+mu = 0.1

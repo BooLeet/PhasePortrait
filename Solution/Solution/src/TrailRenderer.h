@@ -6,8 +6,6 @@ class TrailRenderer : public RendererBehaviour
 private:
 	std::deque<vec3> samples;
 
-	float testAngle = 0;
-
 	GLuint VertexArrayID = 0;
 
 	float sampleTimeCounter = 0;
@@ -25,6 +23,4 @@ public:
 	void Start();
 
 	void Update();
-
-	void OnDestroy();
 };

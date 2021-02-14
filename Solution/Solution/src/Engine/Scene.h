@@ -22,4 +22,6 @@ public:
 	Engine* GetEnginePointer() const { return engine; }
 
 	void UpdateAllObjects();
+
+	size_t GetObjectCount() const;
 };

@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CoordinateSystemRenderer.cpp" />
+    <ClCompile Include="src\DifferentialEquation.cpp" />
     <ClCompile Include="src\Engine\Input.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Engine\CameraBehaviour.cpp" />
@@ -147,8 +149,14 @@
     <ClCompile Include="src\ExpressionCalculator.cpp" />
     <ClCompile Include="src\PhaseFlow.cpp" />
     <ClCompile Include="src\TrailRenderer.cpp" />
+    <ClCompile Include="src\Engine\vendor\imgui\imgui.cpp" />
+    <ClCompile Include="src\Engine\vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\Engine\vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\Engine\vendor\imgui\imgui_impl_glfw_gl3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CoordinateSystemRenderer.h" />
+    <ClInclude Include="src\DifferentialEquation.h" />
     <ClInclude Include="src\Engine\EngineLibrary.h" />
     <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Copypasted.h" />
@@ -167,6 +175,13 @@
     <ClInclude Include="src\ExpressionCalculator.h" />
     <ClInclude Include="src\PhaseFlow.h" />
     <ClInclude Include="src\TrailRenderer.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\imconfig.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\imgui.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\stb_rect_pack.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\stb_textedit.h" />
+    <ClInclude Include="src\Engine\vendor\imgui\stb_truetype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

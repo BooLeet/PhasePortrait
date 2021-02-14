@@ -32,22 +32,25 @@ using namespace std::chrono;
 #include "Engine/SphericalCoordinateBehaviour.h"
 #include "TrailRenderer.h"
 #include "PhaseFlow.h"
+#include "DifferentialEquation.h"
+#include "CoordinateSystemRenderer.h"
 
 int main(void)
 {
 	Engine engine = Engine(1280, 720);
 	SceneObject* camera = engine.GetScene()->CreateObject("Camera");
 	camera->AddBehaviour<CameraBehaviour>();
-	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 10;
+	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 12;
 	camera->transform.SetPosition(vec3(0, 0, 0));
 
 	/*SceneObject* coloredCube = engine.GetScene()->CreateObject("ColoredCube");
 	coloredCube->AddBehaviour<ColoredCubeRenderer>();*/
 	//coloredCube->transform.SetScale(vec3(50, 50, 50));
 
-	/*SceneObject* trailTest = engine.GetScene()->CreateObject("Trail");
-	TrailRenderer* trailRenderer = trailTest->AddBehaviour<TrailRenderer>();
-	trailRenderer->renderMode = TrailRenderer::RenderMode::Lines;*/
+	SceneObject* coordinateSystem = engine.GetScene()->CreateObject("Coordinate System");
+	CoordinateSystemRenderer* coordinateRenderer = coordinateSystem->AddBehaviour<CoordinateSystemRenderer>();
+	coordinateRenderer->SetRadius(20);
+	coordinateRenderer->SetSegmentLength(1.5707963);
 	
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
@@ -58,15 +61,17 @@ int main(void)
 	std::cin >> fileName;
 
 	std::ifstream file(fileName);
-	phaseFlow->rightSideExpression = ReadExpression(file);
+
+	DifferentialEquation differentialEquation(2, Expression::ReadExpression(file));
+	phaseFlow->SetDifferentialEquation(differentialEquation);
 
 	phaseFlow->sampleSize = 32;
 	//phaseFlow->differentialEquationOrder = 3;
 	
 	engine.timeScale = 1;
 
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	//ShowWindow(GetConsoleWindow(), SW_HIDE);
 	engine.MainLoop();
-	ShowWindow(GetConsoleWindow(), SW_SHOW);
+	//ShowWindow(GetConsoleWindow(), SW_SHOW);
 }
 

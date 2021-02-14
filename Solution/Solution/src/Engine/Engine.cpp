@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <iostream>
 
+#include "vendor/imgui/imgui.h"
+#include "vendor/imgui/imgui_impl_glfw_gl3.h"
+
 // Include GLEW
 #include <GL/glew.h>
 
@@ -77,11 +80,28 @@ int Engine::MainLoop()
 		return -1;
 	}
 
+
+
+
+	// Setup ImGui binding
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
+	ImGui_ImplGlfwGL3_Init(window, true);
+
+	// Setup style
+	//ImGui::StyleColorsDark();
+	ImGui::StyleColorsClassic();
+
+
+
+
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	// Black background
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
@@ -97,17 +117,23 @@ int Engine::MainLoop()
 		auto start = high_resolution_clock::now();
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		ImGui_ImplGlfwGL3_NewFrame();
 
 		scene->UpdateAllObjects();
 		cameraRegistry.RenderCameras(rendererRegistry);
+
+		ImGui::Render();
+		ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
 		// Swap buffers
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
+
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 		unscaledDeltaTime = duration.count() * 0.000001;
+		//std::cout << "Object Count = " << scene->GetObjectCount() << '\n';
 		//std::cout << "FPS: " << 1 / unscaledDeltaTime << '\n';
 
 		// To prevent bugs caused by big lags
@@ -117,7 +143,9 @@ int Engine::MainLoop()
 
 	glDeleteVertexArrays(1, &VertexArrayID);
 
-	// Close OpenGL window and terminate GLFW
+	// Cleanup
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
 	glfwTerminate();
 
 	return 0;
@@ -151,6 +179,11 @@ double Engine::GetUnscaledDeltaTime() const
 Input* Engine::GetInput() const
 {
 	return input;
+}
+
+void Engine::ConsoleLog(std::string str)
+{
+	std::cout << str << '\n';
 }
 
 bool Engine::CloseWindow()
@@ -188,13 +221,11 @@ void Engine::CameraRegistry::RenderCameras(const Engine::RendererRegistry& rende
 
 void Engine::RendererRegistry::RegisterRenderer(RendererBehaviour* renderer)
 {
-	std::cout << "RegisterRendererStart\n";
 	auto iterator = std::find(renderers.begin(), renderers.end(), renderer);
 	if (iterator != renderers.end())
 		return;
 
 	renderers.push_back(renderer);
-	std::cout << "RegisterRendererEnd\n";
 }
 
 void Engine::RendererRegistry::UnregisterRenderer(RendererBehaviour* renderer)

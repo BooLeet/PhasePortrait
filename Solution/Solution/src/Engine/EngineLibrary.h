@@ -5,5 +5,6 @@
 #include "RendererBehaviour.h"
 #include "CameraBehaviour.h"
 #include "Input.h"
+#include "Mesh.h"
 
 #include "OpenGLComponents.h"
