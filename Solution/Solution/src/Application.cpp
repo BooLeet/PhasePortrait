@@ -62,21 +62,21 @@ int main(void)
 
 	
 	
-	std::string fileName;
+	/*std::string fileName;
 	std::cout << "Enter the file name: ";
 	std::cin >> fileName;
 
 	std::ifstream file(fileName);
 
 	DifferentialEquation differentialEquation(2, Expression::ReadExpression(file));
-	phaseFlow->SetDifferentialEquation(differentialEquation);
+	phaseFlow->SetDifferentialEquation(differentialEquation);*/
 
 	phaseFlow->sampleSize = 32;
 	//phaseFlow->differentialEquationOrder = 3;
 	
 	engine.timeScale = 1;
 
-	//ShowWindow(GetConsoleWindow(), SW_HIDE);
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 	engine.MainLoop();
 	//ShowWindow(GetConsoleWindow(), SW_SHOW);
 }

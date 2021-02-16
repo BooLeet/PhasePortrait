@@ -59,5 +59,23 @@ public:
 	void OnDestroy();
 
 	// Задание дифференциального уравнения
-	void SetDifferentialEquation(DifferentialEquation& differentialEquationReference);
+	void SetDifferentialEquation(DifferentialEquation* differentialEquationReference);
+
+private:
+	enum class UIState
+	{
+		EquationSetting,Simulation,EditEquation
+	};
+
+	UIState currentUIState = UIState::EquationSetting;
+	char* equationInput = new char[100]();
+	char* variablesInput = new char[100]();
+
+	void HandleUI();
+
+	void EquationSettingUI();
+
+	void SimulationWindowUI();
+
+	void EditEquationUI();
 };

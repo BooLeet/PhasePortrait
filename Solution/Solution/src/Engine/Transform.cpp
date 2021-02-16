@@ -60,50 +60,6 @@ vec3 Transform::GetScale() const
 
 void Transform::UpdateDirectionVectors()
 {
-	
-
-	/*forward = glm::vec3(0, 0, 1);
-
-	forward = glm::rotate(forward, rotation.z, glm::vec3(0, 0, 1));
-	forward = glm::rotate(forward, rotation.x, glm::vec3(1, 0, 0));
-	forward = glm::rotate(forward, rotation.y, glm::vec3(0, 1, 0));
-
-	up = glm::vec3(0, 1, 0);
-
-	up = glm::rotate(up, rotation.z, glm::vec3(0, 0, 1));
-	up = glm::rotate(up, rotation.x, glm::vec3(1, 0, 0));
-	up = glm::rotate(up, rotation.y, glm::vec3(0, 1, 0));
-
-	right = glm::vec3(1, 0, 0);
-
-	right = glm::rotate(right, rotation.z, glm::vec3(0, 0, 1));
-	right = glm::rotate(right, rotation.x, glm::vec3(1, 0, 0));
-	right = glm::rotate(right, rotation.y, glm::vec3(0, 1, 0));*/
-
-
-
-
-	/*forward = glm::vec3(0, 0, 1);
-
-	forward = glm::rotate(forward, rotation.y, glm::vec3(0, 1, 0));
-	forward = glm::rotate(forward, rotation.x, glm::vec3(1, 0, 0));
-	forward = glm::rotate(forward, rotation.z, glm::vec3(0, 0, 1));
-	
-	
-
-	up = glm::vec3(0, 1, 0);
-
-	up = glm::rotate(up, rotation.y, glm::vec3(0, 1, 0));
-	up = glm::rotate(up, rotation.x, glm::vec3(1, 0, 0));
-	up = glm::rotate(up, rotation.z, glm::vec3(0, 0, 1));
-	
-	
-
-	right = glm::vec3(1, 0, 0);
-
-	right = glm::rotate(right, rotation.y, glm::vec3(0, 1, 0));
-	right = glm::rotate(right, rotation.x, glm::vec3(1, 0, 0));
-	right = glm::rotate(right, rotation.z, glm::vec3(0, 0, 1));*/
 
 	vec4 forward4 = vec4(0, 0, 1, 0);
 	vec4 up4 = vec4(0, 1, 0, 0);

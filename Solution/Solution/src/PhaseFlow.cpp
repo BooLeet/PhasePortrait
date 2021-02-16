@@ -15,6 +15,9 @@
 
 
 #include <string>
+#include <fstream>
+#include <strstream>
+
 
 float PhaseFlow::CalculateDifferentialEquation(std::vector<float>& point)
 {
@@ -151,14 +154,82 @@ void PhaseFlow::Update()
 		phasePoint.first->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(phasePoint.second));
 	}
 
+	HandleUI();
+}
+
+void PhaseFlow::OnDestroy()
+{
+	ClearPhasePoints();
+	glDeleteProgram(programID);
+	delete[] equationInput;
+	delete[] variablesInput;
+}
+
+void PhaseFlow::SetDifferentialEquation(DifferentialEquation* differentialEquationReference)
+{
+	delete differentialEquation;
+	differentialEquation = differentialEquationReference;
+}
+
+void PhaseFlow::HandleUI()
+{
+	switch (currentUIState)
+	{
+	case UIState::EquationSetting: EquationSettingUI(); break;
+	case UIState::Simulation: SimulationWindowUI(); break;
+	case UIState::EditEquation: EditEquationUI(); break;
+
+	default:
+		break;
+	}
+}
+
+void PhaseFlow::EquationSettingUI()
+{
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
-	ImGui::Begin("Phase Flow Controls");
+	ImGui::Begin("Equation Editing");
+
+	static int diffEqOrder = 1;
+	ImGui::InputInt("Equation Order", &diffEqOrder);
+	if (diffEqOrder < 1)
+		diffEqOrder = 1;
+	ImGui::Text("diff(%d) = ", diffEqOrder); ImGui::SameLine();
+
+	ImGui::InputText("", equationInput, 100);
+	ImGui::InputTextMultiline("Variables", variablesInput, 100);
 	
+
+
+	if (ImGui::Button("Confirm Equation"))
+	{
+		std::stringstream tempStream;
+		tempStream << equationInput << '\n' << variablesInput;
+		
+		SetDifferentialEquation(new DifferentialEquation(diffEqOrder, Expression::ReadExpression(tempStream)));
+
+		// validation
+		stopSimulation = true;
+		currentUIState = UIState::Simulation;
+	}
+
+	ImGui::End();
+}
+
+void PhaseFlow::SimulationWindowUI()
+{
+	ImGui::SetNextWindowPos(ImVec2(0, 0));
+	ImGui::Begin("Simulation Controls");
+
 	ImGui::Text("%.1f FPS (%.3f ms)", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
 	ImGui::Text("Differential Equation:");
 
 	std::string expression = "diff(" + std::to_string(differentialEquation->GetOrder()) + ") = " + differentialEquation->rightSideExpression.GetString().c_str();
 	ImGui::Text(expression.c_str());
+
+	if (ImGui::Button("Edit Equation"))
+	{
+		currentUIState = UIState::EquationSetting;
+	}
 
 	if (ImGui::Button("Start"))
 		startSimulation = true;
@@ -195,13 +266,6 @@ void PhaseFlow::Update()
 	ImGui::End();
 }
 
-void PhaseFlow::OnDestroy()
+void PhaseFlow::EditEquationUI()
 {
-	ClearPhasePoints();
-	glDeleteProgram(programID);
-}
-
-void PhaseFlow::SetDifferentialEquation(DifferentialEquation& differentialEquationReference)
-{
-	differentialEquation = &differentialEquationReference;
 }
