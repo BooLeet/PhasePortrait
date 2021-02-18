@@ -99,7 +99,7 @@ void ColoredCubeRenderer::Update()
 {
 }
 
-void ColoredCubeRenderer::OnDestroy()
+void ColoredCubeRenderer::OnDestroyRenderer()
 {
 	delete meshToDraw;
 	glDeleteProgram(programID);

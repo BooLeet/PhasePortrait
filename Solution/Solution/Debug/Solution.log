@@ -1,23 +1,11 @@
-﻿  PhaseFlow.cpp
+﻿  Application.cpp
 D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(16,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+  ColoredCubeRenderer.cpp
+  TrailRenderer.cpp
 D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(16,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(25,69): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(48,137): warning C4244: 'argument': conversion from 'double' to 'const unsigned int', possible loss of data
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(97,41): warning C4305: '=': truncation from 'double' to 'float'
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(102,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(102,55): warning C4244:         with
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(102,55): warning C4244:         [
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(102,55): warning C4244:             _Ty=GLfloat
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(102,55): warning C4244:         ]
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(105,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(105,55): warning C4244:         with
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(105,55): warning C4244:         [
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(105,55): warning C4244:             _Ty=GLfloat
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(105,55): warning C4244:         ]
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(108,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(108,55): warning C4244:         with
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(108,55): warning C4244:         [
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(108,55): warning C4244:             _Ty=GLfloat
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(108,55): warning C4244:         ]
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(242,37): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(16,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(33,21): warning C4018: '<': signed/unsigned mismatch
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(52,21): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(107,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe

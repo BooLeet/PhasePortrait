@@ -55,6 +55,9 @@ public:
 	// Вычисление выражения по заданному выражению и ассоциативному массиву функций
 	double EvaluateExpression(std::map<std::string, function >& functions);
 
+	// Вычисление выражения по заданному выражению и ассоциативному массиву функций и запись первой попавшейся ошибки
+	std::pair<double,std::string> EvaluateExpressionAndGetError(std::map<std::string, function >& functions);
+
 	std::string GetString() const;
 };
 

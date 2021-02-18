@@ -11,12 +11,12 @@ void PrintVec3(const vec3& vector)
 
 void TrailRenderer::Start()
 {
-	
+	samples = new std::deque<vec3>();
 }
 
 void TrailRenderer::Render(mat4 projectionViewMatrix)
 {
-	size_t currentSamplesSize = samples.size();
+	size_t currentSamplesSize = samples->size();
 	if (currentSamplesSize == 0)
 		return;
 
@@ -25,15 +25,15 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 	std::vector<GLfloat> colorData(length);
 
 
-	std::deque<vec3> samplesCopy = samples;
+	std::deque<vec3>* samplesCopy = new std::deque<vec3>(*samples);
 
-	vec3 trailHead = samplesCopy.front();
+	vec3 trailHead = samplesCopy->front();
 
 	if (currentSamplesSize < maxSamples)
 		for (int i = 0; i < currentSamplesSize; ++i)
 		{
-			vec3 currentVertex = samplesCopy.front() - trailHead;
-			samplesCopy.pop_front();
+			vec3 currentVertex = samplesCopy->front() - trailHead;
+			samplesCopy->pop_front();
 
 			vertexData[i * 3] = currentVertex.x;
 			vertexData[i * 3 + 1] = currentVertex.y;
@@ -51,9 +51,9 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 	{
 		for (int i = 0; i < currentSamplesSize - 1; ++i)
 		{
-			vec3 currentVertex = samplesCopy.front() - trailHead;
+			vec3 currentVertex = samplesCopy->front() - trailHead;
 			if (i != currentSamplesSize - 2)
-				samplesCopy.pop_front();
+				samplesCopy->pop_front();
 
 			vertexData[i * 3] = currentVertex.x;
 			vertexData[i * 3 + 1] = currentVertex.y;
@@ -67,11 +67,11 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 			colorData[i * 3 + 1] = newColor.y;
 			colorData[i * 3 + 2] = newColor.z;
 		}
-		if (samplesCopy.size() > 1)
+		if (samplesCopy->size() > 1)
 		{
-			vec3 previousVertex = samplesCopy.front() - trailHead;
-			samplesCopy.pop_front();
-			vec3 currentVertex = samplesCopy.front() - trailHead;
+			vec3 previousVertex = samplesCopy->front() - trailHead;
+			samplesCopy->pop_front();
+			vec3 currentVertex = samplesCopy->front() - trailHead;
 			float positionInterpolationParameter = 1 - sampleTimeCounter / sampleLifeTime;
 			vec3 interpolatedVertex = (1 - positionInterpolationParameter) * previousVertex + positionInterpolationParameter * currentVertex;
 
@@ -84,6 +84,8 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 			colorData[(currentSamplesSize - 1) * 3 + 2] = trailTailColor.z;
 		}
 	}
+
+	delete samplesCopy;
 	
 	GLenum mode = GL_LINE_STRIP;
 	if (renderMode == RenderMode::Points)
@@ -101,18 +103,23 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 
 void TrailRenderer::Update()
 {
-	if(samples.size() > 0)
-		samples.pop_front();
-	samples.emplace_front(sceneObject->transform.GetPosition());
+	if(samples->size() > 0)
+		samples->pop_front();
+	samples->emplace_front(sceneObject->transform.GetPosition());
 	sampleTimeCounter += engine->GetDeltaTime();
 
 	if (sampleTimeCounter >= sampleLifeTime)
 	{
 		sampleTimeCounter -= sampleLifeTime;
-		samples.emplace_front(sceneObject->transform.GetPosition());
-		if (samples.size() > maxSamples)
-			samples.pop_back();
+		samples->emplace_front(sceneObject->transform.GetPosition());
+		if (samples->size() > maxSamples)
+			samples->pop_back();
 	}
+}
+
+void TrailRenderer::OnDestroyRenderer()
+{
+	delete samples;
 }
 
 

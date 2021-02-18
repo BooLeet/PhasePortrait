@@ -4,7 +4,7 @@
 class TrailRenderer : public RendererBehaviour
 {
 private:
-	std::deque<vec3> samples;
+	std::deque<vec3>* samples;
 
 	GLuint VertexArrayID = 0;
 
@@ -23,4 +23,6 @@ public:
 	void Start();
 
 	void Update();
+
+	void OnDestroyRenderer();
 };

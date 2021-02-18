@@ -22,8 +22,13 @@
 float PhaseFlow::CalculateDifferentialEquation(std::vector<float>& point)
 {
 	currentPointForCalculation = &point;
-	
-	return differentialEquation->rightSideExpression.EvaluateExpression(calculatorFunctions);
+	std::pair<double,std::string> result = differentialEquation->rightSideExpression.EvaluateExpressionAndGetError(calculatorFunctions);
+	equationErrorMessage = result.second;
+	if (result.second == "")
+		return result.first;
+
+	stopSimulation = true;
+	return 0;
 }
 
 void PhaseFlow::CalculatorFunctionSetup()
@@ -225,11 +230,17 @@ void PhaseFlow::SimulationWindowUI()
 
 	std::string expression = "diff(" + std::to_string(differentialEquation->GetOrder()) + ") = " + differentialEquation->rightSideExpression.GetString().c_str();
 	ImGui::Text(expression.c_str());
+	if (equationErrorMessage != "")
+		ImGui::Text(("Error: " + equationErrorMessage).c_str());
 
 	if (ImGui::Button("Edit Equation"))
-	{
 		currentUIState = UIState::EquationSetting;
-	}
+
+	int sampleCount = sampleSize;
+	ImGui::InputInt("Sample Count", &sampleCount);
+	if (sampleCount < 0)
+		sampleCount = 0;
+	sampleSize = sampleCount;
 
 	if (ImGui::Button("Start"))
 		startSimulation = true;

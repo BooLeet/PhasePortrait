@@ -16,5 +16,5 @@ public:
 
 	void Awake();
 
-	void OnDestroy();
+	void OnDestroy() final;
 };

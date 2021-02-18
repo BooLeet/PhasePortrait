@@ -7,6 +7,7 @@ class ObjectBehaviour
 {
 private:
 	bool hasAwoken = false;
+	bool shouldBeRemoved = false;
 protected:
 	SceneObject* sceneObject;
 	Engine* engine;
@@ -28,4 +29,7 @@ public:
 	void virtual OnDestroy() {};
 
 	SceneObject* GetSceneObject();
+
+	void MarkToRemove() { shouldBeRemoved = true; }
+	bool GetRemoveMark() const { return shouldBeRemoved; }
 };

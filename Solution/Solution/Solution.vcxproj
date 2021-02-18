@@ -147,6 +147,7 @@
     <ClCompile Include="src\Engine\SphericalCoordinateBehaviour.cpp" />
     <ClCompile Include="src\Engine\Transform.cpp" />
     <ClCompile Include="src\ExpressionCalculator.cpp" />
+    <ClCompile Include="src\MemLeakTester.cpp" />
     <ClCompile Include="src\PhaseFlow.cpp" />
     <ClCompile Include="src\TrailRenderer.cpp" />
     <ClCompile Include="src\Engine\vendor\imgui\imgui.cpp" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="src\CoordinateSystemRenderer.h" />
     <ClInclude Include="src\DifferentialEquation.h" />
+    <ClInclude Include="src\EmptyBehaviour.h" />
     <ClInclude Include="src\Engine\EngineLibrary.h" />
     <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Copypasted.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="src\Engine\SphericalCoordinateBehaviour.h" />
     <ClInclude Include="src\Engine\Transform.h" />
     <ClInclude Include="src\ExpressionCalculator.h" />
+    <ClInclude Include="src\MemLeakTester.h" />
     <ClInclude Include="src\PhaseFlow.h" />
     <ClInclude Include="src\TrailRenderer.h" />
     <ClInclude Include="src\Engine\vendor\imgui\imconfig.h" />

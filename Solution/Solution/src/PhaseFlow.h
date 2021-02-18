@@ -70,6 +70,7 @@ private:
 	UIState currentUIState = UIState::EquationSetting;
 	char* equationInput = new char[100]();
 	char* variablesInput = new char[100]();
+	std::string equationErrorMessage;
 
 	void HandleUI();
 

@@ -10,6 +10,9 @@ void ObjectBehaviour::ValidateBehaviour(SceneObject* sceneObject)
 
 void ObjectBehaviour::TryAwake()
 {
+	if (shouldBeRemoved)
+		return;
+
 	if (enabled && !hasAwoken)
 	{
 		hasAwoken = true;
@@ -20,14 +23,14 @@ void ObjectBehaviour::TryAwake()
 
 void ObjectBehaviour::TryUpdate()
 {
-	if (!enabled)
+	if (!enabled || shouldBeRemoved)
 		return;
 	Update();
 }
 
 void ObjectBehaviour::TryLateUpdate()
 {
-	if (!enabled)
+	if (!enabled || shouldBeRemoved)
 		return;
 	LateUpdate();
 }

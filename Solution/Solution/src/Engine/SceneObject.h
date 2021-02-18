@@ -22,6 +22,7 @@ private:
 	std::vector<ObjectBehaviour*> behaviours;
 
 	void RemoveBehaviour(const std::vector<ObjectBehaviour*>::iterator& iterator);
+	bool shouldBeDestroyed;
 
 public:
 	Transform transform;
@@ -35,6 +36,8 @@ public:
 
 	// Removes an object from the scene
 	void Destroy();
+
+	bool GetDestructionFlag() const;
 
 	// Removes all behaviours from the object
 	void RemoveBehaviours();

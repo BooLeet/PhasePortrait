@@ -236,6 +236,26 @@ double Expression::EvaluateExpression(std::map<std::string, function>& functions
 	return stack.top();
 }
 
+std::pair<double, std::string> Expression::EvaluateExpressionAndGetError(std::map<std::string, function>& functions)
+{
+	std::stack<double> stack;
+
+	for (size_t i = 0; i < postfixTerms.size(); ++i)
+	{
+		switch (postfixTerms[i].type)
+		{
+		case TermType::Variable: 
+			if (expr.second.find(postfixTerms[i].name) == expr.second.end())
+				return { 0, "variable " + postfixTerms[i].name + " is not defined" };
+			stack.push(expr.second.at(postfixTerms[i].name)); break;
+		case TermType::Constant: stack.push(std::stod(postfixTerms[i].name)); break;
+		case TermType::Operator: case TermType::Function:
+			stack.push(functions[postfixTerms[i].name](stack));
+		}
+	}
+	return { stack.top(),"" };
+}
+
 std::string Expression::GetString() const
 {
 	return expr.first;

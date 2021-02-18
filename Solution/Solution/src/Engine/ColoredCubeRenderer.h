@@ -21,5 +21,5 @@ public:
 
 	void Update();
 
-	void OnDestroy();
+	void OnDestroyRenderer();
 };

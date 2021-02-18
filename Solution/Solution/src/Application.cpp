@@ -34,6 +34,8 @@ using namespace std::chrono;
 #include "PhaseFlow.h"
 #include "DifferentialEquation.h"
 
+#include "MemLeakTester.h"
+
 int main(void)
 {
 	Engine engine = Engine(1280, 720);
@@ -42,41 +44,14 @@ int main(void)
 	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 12;
 	camera->transform.SetPosition(vec3(0, 0, 0));
 
-	/*SceneObject* coloredCube = engine.GetScene()->CreateObject("ColoredCube");
-	coloredCube->AddBehaviour<ColoredCubeRenderer>();*/
-	//coloredCube->transform.SetScale(vec3(50, 50, 50));
-
-	/*SceneObject* coordinateSystem = engine.GetScene()->CreateObject("Coordinate System");
-	CoordinateSystemRenderer* coordinateRenderer = coordinateSystem->AddBehaviour<CoordinateSystemRenderer>();
-	coordinateRenderer->SetRadius(20);
-	coordinateRenderer->SetSegmentLength(1.5707963);*/
-	
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
-
-	/*CoordinateSystemRenderer* coordinateRenderer = phaseFlowObj->AddBehaviour<CoordinateSystemRenderer>();
-	coordinateRenderer->SetRadius(20);
-	coordinateRenderer->SetSegmentLength(1.5707963);*/
-
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
 	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
 
+	//engine.GetScene()->CreateObject("Memor Leak Test")->AddBehaviour<MemLeakTester>();
 	
-	
-	/*std::string fileName;
-	std::cout << "Enter the file name: ";
-	std::cin >> fileName;
 
-	std::ifstream file(fileName);
-
-	DifferentialEquation differentialEquation(2, Expression::ReadExpression(file));
-	phaseFlow->SetDifferentialEquation(differentialEquation);*/
-
-	phaseFlow->sampleSize = 32;
-	//phaseFlow->differentialEquationOrder = 3;
-	
-	engine.timeScale = 1;
-
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	//ShowWindow(GetConsoleWindow(), SW_HIDE); 
 	engine.MainLoop();
 	//ShowWindow(GetConsoleWindow(), SW_SHOW);
 }
