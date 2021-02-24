@@ -38,7 +38,7 @@ using namespace std::chrono;
 
 int main(void)
 {
-	Engine engine = Engine(1280, 720);
+	Engine engine = Engine(1600, 900);
 	SceneObject* camera = engine.GetScene()->CreateObject("Camera");
 	camera->AddBehaviour<CameraBehaviour>();
 	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 12;

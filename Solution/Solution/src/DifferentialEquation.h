@@ -13,3 +13,4 @@ public:
 	size_t GetOrder() const;
 
 };
+

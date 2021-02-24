@@ -1,11 +1,70 @@
 ﻿  Application.cpp
 D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(16,28): warning C4305: 'initializing': truncation from 'double' to 'float'
-  ColoredCubeRenderer.cpp
-  TrailRenderer.cpp
-D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(16,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(20,40): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10): message : while compiling class template member function 'Vector<float>::Vector(size_t,double)'
+D:\GitHub\PhasePortrait\Solution\Solution\src\Application.cpp(59): message : see reference to function template instantiation 'Vector<float>::Vector(size_t,double)' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(48): message : see reference to class template instantiation 'Vector<float>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(669): message : see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(177): message : see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+  PhaseFlow.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(647): message : see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
 D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(16,28): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(33,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(52,21): warning C4018: '<': signed/unsigned mismatch
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(20,40): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(31,16): warning C4244: 'return': conversion from '_Ty1' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(31,16): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(31,16): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(31,16): warning C4244:             _Ty1=double
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(31,16): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(57,134): warning C4244: 'argument': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(71,15): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(85,63): warning C4305: 'argument': truncation from 'double' to 'T'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(85,63): warning C4305:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(85,63): warning C4305:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(85,63): warning C4305:             T=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(85,63): warning C4305:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(127,28): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(129,28): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(144,41): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(150,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(150,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(150,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(150,55): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(150,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(153,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(153,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(153,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(153,55): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(153,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(156,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(156,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(156,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(156,55): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(156,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(186,21): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(200,49): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(335,26): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(345,37): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(364,37): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:             T=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(46): message : while compiling class template member function 'Vector<float> operator *(double,const Vector<float> &)'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(80): message : see reference to function template instantiation 'Vector<float> operator *(double,const Vector<float> &)' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(48): message : see reference to class template instantiation 'Vector<float>' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10): message : while compiling class template member function 'Vector<float>::Vector(size_t,double)'
   Generating Code...
-D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(107,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(38): message : see reference to function template instantiation 'Vector<float>::Vector(size_t,double)' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(62): warning C4172: returning address of local variable or temporary
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe

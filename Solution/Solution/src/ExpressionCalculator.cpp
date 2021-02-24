@@ -260,3 +260,12 @@ std::string Expression::GetString() const
 {
 	return expr.first;
 }
+
+void Expression::SetVariable(std::string name, double val)
+{
+	auto iterator = expr.second.find(name);
+	if (iterator == expr.second.end())
+		expr.second.insert(std::pair<std::string, double>(name, val));
+	else
+		(*iterator).second = val;
+}

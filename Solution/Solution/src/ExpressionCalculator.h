@@ -59,6 +59,8 @@ public:
 	std::pair<double,std::string> EvaluateExpressionAndGetError(std::map<std::string, function >& functions);
 
 	std::string GetString() const;
+
+	void SetVariable(std::string name, double val);
 };
 
 //enum class TermType
