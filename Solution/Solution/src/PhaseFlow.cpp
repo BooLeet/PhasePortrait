@@ -1,5 +1,4 @@
 #include "PhaseFlow.h"
-#include "TrailRenderer.h"
 #include "Engine/Engine.h"
 #include "Engine/Scene.h"
 #include "Engine/SceneObject.h"
@@ -12,6 +11,7 @@
 #include "ExpressionCalculator.h"
 #include "DifferentialEquation.h"
 #include "CoordinateSystemRenderer.h"
+#include "ColorUtility.h"
 
 #include "Vector.h"
 
@@ -103,7 +103,7 @@ Vector<float> PhaseFlow::GetPhaseSpeedVector(double t,const Vector<float>& point
 	return result;
 }
 
-vec3 PhaseFlow::GetNewTrailPosition(const Vector<float>& phasePosition)
+vec3 PhaseFlow::GetTrailPosition(const Vector<float>& phasePosition)
 {
 	vec3 result = vec3(0);
 	if (differentialEquation->GetOrder() > xDiffOrder)
@@ -137,12 +137,6 @@ void PhaseFlow::PhasePointsSetup()
 		for (size_t j = 0; j < jSize; ++j)
 			for (size_t k = 0; k < kSize; ++k)
 			{
-				SceneObject* obj = engine->GetScene()->CreateObject("Trail");
-				TrailRenderer* trailRenderer = obj->AddBehaviour<TrailRenderer>();
-				trailRenderer->renderMode = renderMode;
-				trailRenderer->sampleLifeTime = trailSampleLifeTime;
-				trailRenderer->maxSamples = trailMaxSamples;
-
 				std::vector<float> phasePosition(differentialEquation->GetOrder(), 0);
 
 				if (differentialEquation->GetOrder() > xDiffOrder)
@@ -154,9 +148,8 @@ void PhaseFlow::PhasePointsSetup()
 				if (differentialEquation->GetOrder() > zDiffOrder)
 					phasePosition[zDiffOrder] = 2 * simulationRadius * (k / (float)(samplePerDimension - 1) - 0.5);
 
-				obj->transform.SetPosition(GetNewTrailPosition(phasePosition));
 				std::vector< std::pair<double, Vector<float>>> phaseTrajectory = GetPhaseTrajectory(phasePosition, simulationStartTimeVolatile, simulationEndTimeVolatile, simulationTimeStepVolatile);
-				phasePoints.push_back(PhasePointContainer(trailRenderer,phaseTrajectory));
+				phasePoints.push_back(PhasePointContainer(phaseTrajectory));
 			}
 
 	simulationStartTime = 0;
@@ -168,39 +161,85 @@ void PhaseFlow::PhasePointsSetup()
 
 void PhaseFlow::ClearPhasePoints()
 {
-	for (PhasePointContainer& point : phasePoints)
-		point.trail->GetSceneObject()->Destroy();//point.first->GetSceneObject()->Destroy();
-
 	phasePoints.clear();
 }
 
-void PhaseFlow::Simulation()
+vec3 PhaseFlow::GetTrajectoryColor(float parameter)
 {
-	if (simulationTimeCounter > simulationEndTime)
+	switch (currentColorMode)
 	{
-		simulationTimeCounter = 0;
-		for (PhasePointContainer& point : phasePoints)
-			point.trail->ClearTrail();
+	case TrajectoryColorMode::SingleColor: return trajectoryFirstColor;
+	case TrajectoryColorMode::TwoColor: return GetInterpolatedColor(parameter, trajectoryFirstColor, trajectorySecondColor);
+	case TrajectoryColorMode::Rainbow: return GetColorRainbow(parameter);
+	default:
+		break;
 	}
+}
 
+void PhaseFlow::Render(mat4 projectionViewMatrix)
+{
 	float fullTime = simulationEndTime - simulationStartTime;
 	for (PhasePointContainer& point : phasePoints)
 	{
-		size_t firstIndex = simulationTimeCounter / simulationTimeStep; //floor(point.trajectory.size() * simulationTimeCounter / fullTime);
+		std::vector<GLfloat> vertexData;
+		std::vector<GLfloat> colorData;
+
+		size_t firstIndex = simulationTimeCounter / simulationTimeStep;
 		size_t secondIndex = firstIndex;
 		if (secondIndex < point.trajectory.size() - 1)
 			secondIndex++;
 
 		double interpolationParameter = (simulationTimeCounter - firstIndex * simulationTimeStep) / simulationTimeStep;
-		if (interpolationParameter < 0)
-			engine->ConsoleLog("PhaseFlow::Simulation() " + std::to_string(interpolationParameter));
 
-		Vector<float> newPosition = point.trajectory[firstIndex].second * (1 - interpolationParameter) + point.trajectory[secondIndex].second * interpolationParameter;
+		// Creating a head of the trajectory
+		vec3 headPosition = GetTrailPosition(point.trajectory[firstIndex].second * (1 - interpolationParameter) + point.trajectory[secondIndex].second * interpolationParameter);
 
-		point.trail->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(newPosition));
+		vertexData.push_back(headPosition.x);
+		vertexData.push_back(headPosition.y);
+		vertexData.push_back(headPosition.z);
+
+		colorData.push_back(trajectoryFirstColor.r);
+		colorData.push_back(trajectoryFirstColor.g);
+		colorData.push_back(trajectoryFirstColor.b);
+
+		// Creating the rest of the trajectory
+		vec3 previousPosition = headPosition;
+		float currentLength = 0;
+		bool endTrajectory = false;
+		for (int i = firstIndex; i >= 0 && !endTrajectory; --i)
+		{
+			// Position
+			vec3 position = GetTrailPosition(point.trajectory[i].second);
+			float currentDistance = distance(previousPosition, position);
+			
+			if (currentLength + currentDistance >= trajectoryMaxLength)
+			{
+				endTrajectory = true;
+				float positionInterpolator = (trajectoryMaxLength - currentLength) / currentDistance;
+
+				position = (1 - positionInterpolator) * previousPosition + positionInterpolator * position;
+				currentDistance = trajectoryMaxLength - currentLength;
+			}
+			
+			vertexData.push_back(position.x);
+			vertexData.push_back(position.y);
+			vertexData.push_back(position.z);
+
+			previousPosition = position;
+			currentLength += currentDistance;
+
+			// Color
+			float colorParameter = currentLength / trajectoryMaxLength;
+			vec3 newColor = GetTrajectoryColor(colorParameter);
+
+			colorData.push_back(newColor.r);
+			colorData.push_back(newColor.g);
+			colorData.push_back(newColor.b);
+		}
+		Mesh meshToDraw = Mesh(vertexData, colorData, engine->GetDefaultShader().GetProgram(), GL_LINE_STRIP);
+		meshToDraw.Render(projectionViewMatrix, sceneObject->transform.GetModelMatrix());
+		/*point.trail->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(newPosition));*/
 	}
-
-	simulationTimeCounter += engine->GetDeltaTime();
 }
 
 void PhaseFlow::Start()
@@ -227,21 +266,15 @@ void PhaseFlow::Update()
 		PhasePointsSetup();
 	}
 
-	Simulation();
+	simulationTimeCounter += engine->GetDeltaTime();
 
-	/*for (std::pair<TrailRenderer*, std::vector<float> >& phasePoint : phasePoints)
-	{
-		std::vector<float> phaseSpeed = GetPhaseSpeedVector(phasePoint.second);
-		for (size_t i = 0; i < differentialEquation->GetOrder(); ++i)
-			phasePoint.second[i] += simulationSpeed * (float)(engine->GetDeltaTime()) * phaseSpeed[i];
-
-		phasePoint.first->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(phasePoint.second));
-	}*/
-
+	if (simulationTimeCounter > simulationEndTime)
+		simulationTimeCounter = simulationEndTime;
+	//ImGui::ShowDemoWindow();
 	HandleUI();
 }
 
-void PhaseFlow::OnDestroy()
+void PhaseFlow::OnDestroyRenderer()
 {
 	ClearPhasePoints();
 	delete[] equationInput;
@@ -270,6 +303,7 @@ void PhaseFlow::HandleUI()
 void PhaseFlow::EquationSettingUI()
 {
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
+	ImGui::SetNextWindowContentWidth(engine->GetWindowWidth() / 3);
 	ImGui::Begin("Equation Editing");
 
 	ImGui::InputInt("Equation Order", &diffEqOrder);
@@ -308,10 +342,10 @@ void PhaseFlow::EquationSettingUI()
 void PhaseFlow::SimulationWindowUI()
 {
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
+	ImGui::SetNextWindowContentWidth(engine->GetWindowWidth() / 3);
 	ImGui::Begin("Simulation Controls");
 
 	ImGui::Text("%.1f FPS (%.3f ms)", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
-	ImGui::Text("Simulation Time: %.3f sec", simulationTimeCounter);
 	ImGui::Text("Differential Equation:");
 
 	std::string expression = "diff(" + std::to_string(differentialEquation->GetOrder()) + ") = " + differentialEquation->rightSideExpression.GetString().c_str();
@@ -325,34 +359,31 @@ void PhaseFlow::SimulationWindowUI()
 	if (ImGui::Button("Starting Menu"))
 		currentUIState = UIState::StartingMenu;
 
-	int sampleCount = sampleSize;
-	ImGui::InputInt("Sample Count", &sampleCount);
-	if (sampleCount < 0)
-		sampleCount = 0;
-	sampleSize = sampleCount;
+	if (ImGui::CollapsingHeader("Simulation menu"))
+	{
+		int sampleCount = sampleSize;
+		ImGui::InputInt("Sample Count", &sampleCount);
+		if (sampleCount < 0)
+			sampleCount = 0;
+		sampleSize = sampleCount;
 
-	ImGui::InputFloat("Simulation Radius", &simulationRadius);
-	if (simulationRadius < 0.01)
-		simulationRadius = 0.01;
+		ImGui::InputFloat("Simulation Radius", &simulationRadius);
+		if (simulationRadius < 0.01)
+			simulationRadius = 0.01;
 
-	ImGui::Text("");
-	ImGui::InputFloat("Start time", &simulationStartTimeVolatile);
-	ImGui::InputFloat("End time", &simulationEndTimeVolatile);
-	if (simulationEndTimeVolatile < simulationStartTimeVolatile)
-		simulationEndTimeVolatile = simulationStartTimeVolatile;
+		ImGui::Text("");
+		ImGui::InputFloat("Start time", &simulationStartTimeVolatile);
+		ImGui::InputFloat("End time", &simulationEndTimeVolatile);
+		if (simulationEndTimeVolatile < simulationStartTimeVolatile)
+			simulationEndTimeVolatile = simulationStartTimeVolatile;
 
-	ImGui::InputFloat("Simulation time step", &simulationTimeStepVolatile);
-	if (simulationTimeStepVolatile <= 0)
-		simulationTimeStepVolatile = 0.001;
+		ImGui::InputFloat("Simulation time step", &simulationTimeStepVolatile);
+		if (simulationTimeStepVolatile <= 0)
+			simulationTimeStepVolatile = 0.001;
 
-	ImGui::Text("Trail settings");
-	ImGui::InputFloat("Sample life time", &trailSampleLifeTime);
-	if (trailSampleLifeTime <= 0)
-		trailSampleLifeTime = 0.01;
-
-	ImGui::InputInt("Max samples", &trailMaxSamples);
-	if (trailMaxSamples <= 1)
-		trailMaxSamples = 2;
+		ImGui::Separator();
+	}
+	ImGui::Spacing();
 
 	if (ImGui::Button("Start"))
 		startSimulation = true;
@@ -361,12 +392,50 @@ void PhaseFlow::SimulationWindowUI()
 		stopSimulation = true;
 
 	static float timeScale = 1;
-	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f    
+	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 1.0f);
 	engine->timeScale = timeScale;
 
+	ImGui::SliderFloat("Simulation time", &simulationTimeCounter, simulationStartTime, simulationEndTime);
 
-	ImGui::Text("\nCoordinates:");
+	// TRAJECTORY
+	ImGui::Spacing();
+	if (ImGui::CollapsingHeader("Trajectory settings"))
+	{
+		ImGui::InputFloat("Max length", &trajectoryMaxLength);
+		if (trajectoryMaxLength <= 0)
+			trajectoryMaxLength = 0.01;
 
+
+		const char* colorModes[] = { "Single Color", "Two Color", "Rainbow"};
+
+		if (ImGui::Button("Select color mode"))
+			ImGui::OpenPopup("select");
+		ImGui::SameLine();
+		ImGui::TextUnformatted(colorModes[(int)currentColorMode]);
+		if (ImGui::BeginPopup("select"))
+		{
+			for (int i = 0; i < IM_ARRAYSIZE(colorModes); i++)
+				if (ImGui::Selectable(colorModes[i]))
+					currentColorMode = (TrajectoryColorMode)i;
+			ImGui::EndPopup();
+		}
+
+		if (currentColorMode == TrajectoryColorMode::SingleColor)
+		{
+			ImGui::ColorPicker3("Color", &trajectoryFirstColor[0]);
+		}
+
+		if (currentColorMode == TrajectoryColorMode::TwoColor)
+		{
+			ImGui::ColorPicker3("Head color", &trajectoryFirstColor[0]);
+			ImGui::ColorPicker3("Tail color", &trajectorySecondColor[0]);
+		}
+			
+		ImGui::Separator();
+	}
+	
+	// COORDINATES
+	ImGui::Spacing();
 	ImGui::Checkbox("Show coordinates", &(coordinateRenderer->enabled));
 
 	static float coordinateRadius = 20;
@@ -374,24 +443,28 @@ void PhaseFlow::SimulationWindowUI()
 	static float segmentNotchSize = 0.1;
 
 	if (coordinateRenderer->enabled)
-	{
-		if (ImGui::InputFloat("Radius", &coordinateRadius))
-			coordinateRenderer->SetRadius(coordinateRadius);
+		if (ImGui::CollapsingHeader("Coordinates settings"))
+		{
+			if (ImGui::InputFloat("Radius", &coordinateRadius))
+				coordinateRenderer->SetRadius(coordinateRadius);
 
 
-		if (ImGui::InputFloat("Segment length", &segmentLength))
-			coordinateRenderer->SetSegmentLength(segmentLength);
+			if (ImGui::InputFloat("Segment length", &segmentLength))
+				coordinateRenderer->SetSegmentLength(segmentLength);
 
 
-		if (ImGui::InputFloat("Segment notch size", &segmentNotchSize))
-			coordinateRenderer->SetSegmentNotchSize(segmentNotchSize);
-	}
+			if (ImGui::InputFloat("Segment notch size", &segmentNotchSize))
+				coordinateRenderer->SetSegmentNotchSize(segmentNotchSize);
+			ImGui::Separator();
+		}
+	
 	ImGui::End();
 }
 
 void PhaseFlow::StartingMenuUI()
 {
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
+	ImGui::SetNextWindowContentWidth(engine->GetWindowWidth() / 3);
 	ImGui::Begin("Starting Menu");
 
 	if (ImGui::Button("Custom Equation"))

@@ -6,8 +6,6 @@ class TrailRenderer : public RendererBehaviour
 private:
 	std::deque<vec3>* samples;
 
-	GLuint VertexArrayID = 0;
-
 	float sampleTimeCounter = 0;
 public:
 	enum class RenderMode { Lines, Triangles, Points };

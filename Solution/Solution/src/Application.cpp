@@ -34,7 +34,6 @@ using namespace std::chrono;
 #include "PhaseFlow.h"
 #include "DifferentialEquation.h"
 
-#include "MemLeakTester.h"
 
 int main(void)
 {
@@ -46,10 +45,6 @@ int main(void)
 
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
-	phaseFlow->renderMode = TrailRenderer::RenderMode::Lines;
-
-	//engine.GetScene()->CreateObject("Memor Leak Test")->AddBehaviour<MemLeakTester>();
-	
 
 	//ShowWindow(GetConsoleWindow(), SW_HIDE); 
 	engine.MainLoop();

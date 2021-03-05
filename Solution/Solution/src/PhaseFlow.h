@@ -1,6 +1,5 @@
 #pragma once
-#include "Engine/ObjectBehaviour.h"
-#include "TrailRenderer.h"
+#include "Engine/RendererBehaviour.h"
 
 #include "ExpressionCalculator.h"
 #include "Vector.h"
@@ -10,7 +9,7 @@
 class DifferentialEquation;
 class CoordinateSystemRenderer;
 
-class PhaseFlow : public ObjectBehaviour
+class PhaseFlow : public RendererBehaviour
 {
 	bool startSimulation = false;
 	bool stopSimulation = false;
@@ -26,16 +25,20 @@ class PhaseFlow : public ObjectBehaviour
 	float simulationEndTime = 0;
 	float simulationTimeStep = 0;
 
-	float trailSampleLifeTime = 0.05;
-	int trailMaxSamples = 25;
+	float trajectoryMaxLength = 10;
+
+	enum class TrajectoryColorMode { SingleColor, TwoColor, Rainbow };
+	TrajectoryColorMode currentColorMode = TrajectoryColorMode::TwoColor;
+
+	vec3 trajectoryFirstColor = vec3(1, 0, 0);
+	vec3 trajectorySecondColor = vec3(0, 0, 1);
 
 	class PhasePointContainer
 	{
 	public:
-		TrailRenderer* trail;
 		std::vector< std::pair<double, Vector<float>>> trajectory;
 
-		PhasePointContainer(TrailRenderer* trailRenderer, std::vector< std::pair<double, Vector<float>>> phaseTrajectory) : trail(trailRenderer), trajectory(phaseTrajectory) {}
+		PhasePointContainer(std::vector< std::pair<double, Vector<float>>> phaseTrajectory) :  trajectory(phaseTrajectory) {}
 	};
 
 
@@ -69,7 +72,7 @@ class PhaseFlow : public ObjectBehaviour
 	Vector<float> GetPhaseSpeedVector(double t, const Vector<float>& point);
 
 	// Возвращает новую позицию точки в зависимости от выбранных фазовых осей визуализации
-	vec3 GetNewTrailPosition(const Vector<float>& phasePosition);
+	vec3 GetTrailPosition(const Vector<float>& phasePosition);
 	
 	// Удаляет предыдущие фазовые точки (если имеются) и создает новые
 	void PhasePointsSetup();
@@ -77,19 +80,19 @@ class PhaseFlow : public ObjectBehaviour
 	// Удаляет предыдущие фазовые точки
 	void ClearPhasePoints();
 
+	vec3 GetTrajectoryColor(float parameter);
 
-	void Simulation();
 public:
 	size_t sampleSize = 1000;
-	
-	TrailRenderer::RenderMode renderMode = TrailRenderer::RenderMode::Lines;
 
 	float simulationSpeed = 1;
 
 	void Start();
 	void Update();
 
-	void OnDestroy();
+	void Render(mat4 projectionViewMatrix);
+
+	void OnDestroyRenderer();
 
 	// Задание дифференциального уравнения
 	void SetDifferentialEquation(DifferentialEquation* differentialEquationReference);
