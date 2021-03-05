@@ -96,7 +96,7 @@ void TrailRenderer::Render(mat4 projectionViewMatrix)
 	else if (renderMode == RenderMode::Triangles)
 		mode = GL_TRIANGLE_STRIP;
 
-	Mesh meshToDraw = Mesh(vertexData, colorData, programID, mode);
+	Mesh meshToDraw = Mesh(vertexData, colorData, engine->GetDefaultShader().GetProgram(), mode);
 	meshToDraw.Render(projectionViewMatrix, sceneObject->transform.GetModelMatrix());
 
 }
@@ -110,16 +110,27 @@ void TrailRenderer::Update()
 
 	if (sampleTimeCounter >= sampleLifeTime)
 	{
-		sampleTimeCounter -= sampleLifeTime;
-		samples->emplace_front(sceneObject->transform.GetPosition());
-		if (samples->size() > maxSamples)
-			samples->pop_back();
+		size_t count = floor(sampleTimeCounter / sampleLifeTime);
+
+		for (size_t i = 0; i < count; ++i)
+		{
+			sampleTimeCounter -= sampleLifeTime;
+			samples->emplace_front(sceneObject->transform.GetPosition());
+			if (samples->size() > maxSamples)
+				samples->pop_back();
+		}
 	}
 }
 
 void TrailRenderer::OnDestroyRenderer()
 {
 	delete samples;
+}
+
+void TrailRenderer::ClearTrail()
+{
+	delete samples;
+	samples = new std::deque<vec3>();
 }
 
 

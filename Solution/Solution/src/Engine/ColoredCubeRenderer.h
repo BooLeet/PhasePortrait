@@ -1,5 +1,6 @@
 #pragma once
-#include "RendererBehaviour.h"
+#include "EngineLibrary.h"
+
 // Include GLEW
 #include <GL/glew.h>
 
@@ -13,7 +14,7 @@ class ColoredCubeRenderer : public RendererBehaviour
 	Mesh* meshToDraw;
 
 public:
-	GLuint programID = 0;
+	Shader* shader;
 	
 	void Start();
 

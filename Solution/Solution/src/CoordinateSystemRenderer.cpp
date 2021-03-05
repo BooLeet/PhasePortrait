@@ -9,7 +9,6 @@ void CoordinateSystemRenderer::Render(mat4 projectionViewMatrix)
 
 void CoordinateSystemRenderer::Start()
 {
-	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
 	CreateMesh();
 }
 
@@ -216,6 +215,5 @@ void CoordinateSystemRenderer::CreateMesh()
 	}
 	
 	std::vector<GLfloat> colorData(vertexData.size(), 0.7);
-
-	mesh = new Mesh(vertexData, colorData, programID, GL_LINES);
+	mesh = new Mesh(vertexData, colorData, engine->GetDefaultShader().GetProgram(), GL_LINES);
 }

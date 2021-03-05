@@ -5,6 +5,7 @@
 #include "ExpressionCalculator.h"
 #include "Vector.h"
 #include <vector>
+#include "Engine/Shader.h"
 
 class DifferentialEquation;
 class CoordinateSystemRenderer;
@@ -25,7 +26,8 @@ class PhaseFlow : public ObjectBehaviour
 	float simulationEndTime = 0;
 	float simulationTimeStep = 0;
 
-	GLuint programID;
+	float trailSampleLifeTime = 0.05;
+	int trailMaxSamples = 25;
 
 	class PhasePointContainer
 	{

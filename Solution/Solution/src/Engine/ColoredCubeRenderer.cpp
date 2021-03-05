@@ -9,7 +9,6 @@
 
 void ColoredCubeRenderer::Start()
 {
-	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
 	std::vector<GLfloat> vertexData = {
 		-1.0f,-1.0f,-1.0f,
 		-1.0f,-1.0f, 1.0f,
@@ -87,7 +86,7 @@ void ColoredCubeRenderer::Start()
 		0.820f,  0.883f,  0.371f,
 		0.982f,  0.099f,  0.879f
 	};
-	meshToDraw = new Mesh(vertexData, colorData, programID, GL_TRIANGLES);
+	meshToDraw = new Mesh(vertexData, colorData, engine->GetDefaultShader().GetProgram(), GL_TRIANGLES);
 }
 
 void ColoredCubeRenderer::Render(mat4 projectionViewMatrix)
@@ -102,5 +101,4 @@ void ColoredCubeRenderer::Update()
 void ColoredCubeRenderer::OnDestroyRenderer()
 {
 	delete meshToDraw;
-	glDeleteProgram(programID);
 }

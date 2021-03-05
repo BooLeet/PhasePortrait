@@ -3,6 +3,7 @@
 #include "RendererBehaviour.h"
 #include "CameraBehaviour.h"
 #include "Input.h"
+#include "Shader.h"
 
 #include <algorithm>
 #include <iostream>
@@ -27,6 +28,10 @@ using namespace glm;
 #include <chrono> 
 using namespace std::chrono;
 
+
+
+#include "ShaderLoader.h"
+
 Engine::Engine(size_t windowWidth, size_t windowHeight)
 {
 	this->windowWidth = windowWidth;
@@ -42,6 +47,7 @@ Engine::~Engine()
 {
 	delete scene;
 	delete input;
+	delete defaultShader;
 }
 
 int Engine::MainLoop()
@@ -80,9 +86,6 @@ int Engine::MainLoop()
 		return -1;
 	}
 
-
-
-
 	// Setup ImGui binding
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -94,9 +97,6 @@ int Engine::MainLoop()
 	//ImGui::StyleColorsDark();
 	ImGui::StyleColorsClassic();
 	//ImGui::StyleColorsLight();
-
-
-
 
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -112,6 +112,10 @@ int Engine::MainLoop()
 	GLuint VertexArrayID = 0;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
+
+
+	// default shader setup
+	defaultShader = new Shader("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
 
 	do 
 	{
@@ -182,9 +186,14 @@ Input* Engine::GetInput() const
 	return input;
 }
 
-void Engine::ConsoleLog(std::string str)
+void Engine::ConsoleLog(std::string str) const
 {
 	std::cout << str << '\n';
+}
+
+const Shader& Engine::GetDefaultShader() const
+{
+	return *defaultShader;
 }
 
 bool Engine::CloseWindow()

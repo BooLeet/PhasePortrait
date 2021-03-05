@@ -36,10 +36,14 @@ void SphericalCoordinateBehaviour::Update()
 	if (abs(angleV) >= pi<float>() / 2)
 		angleV = sign(angleV) * pi<float>() / 2;
 
+	double currentZoomSpeed = zoomSpeed;
+	if (engine->GetInput()->GetKey(GLFW_KEY_LEFT_SHIFT))
+		currentZoomSpeed *= 5;
+
 	if (engine->GetInput()->GetKey(GLFW_KEY_W))
-		distance -= 2 * engine->GetUnscaledDeltaTime();
+		distance -= currentZoomSpeed * engine->GetUnscaledDeltaTime();
 	if (engine->GetInput()->GetKey(GLFW_KEY_S))
-		distance += 2 * engine->GetUnscaledDeltaTime();
+		distance += currentZoomSpeed * engine->GetUnscaledDeltaTime();
 
 	vec3 rotation = vec3(-angleV, angleU, angleW);
 	vec3 position = vec3(distance * sin(angleU) * cos(angleV),

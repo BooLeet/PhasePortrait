@@ -1,6 +1,6 @@
 #pragma once
 #include "OpenGLComponents.h"
-
+#include "Shader.h"
 #include <vector>
 
 class Transform;
@@ -18,7 +18,7 @@ class Mesh
 
 public:
 	GLint drawMode;
-	Mesh(const std::vector<GLfloat>& vertexData, const std::vector<GLfloat>& colorData,const GLuint& shaderID, GLint drawMode = GL_TRIANGLES);
+	Mesh(const std::vector<GLfloat>& vertexData, const std::vector<GLfloat>& colorData, GLuint programID, GLint drawMode = GL_TRIANGLES);
 	~Mesh();
 
 	void Render(const mat4& projectionViewMatrix, const mat4& modelMatrix);

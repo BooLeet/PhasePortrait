@@ -6,5 +6,6 @@
 #include "CameraBehaviour.h"
 #include "Input.h"
 #include "Mesh.h"
+#include "Shader.h"
 
 #include "OpenGLComponents.h"

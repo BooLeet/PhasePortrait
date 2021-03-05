@@ -143,6 +143,7 @@
     <ClCompile Include="src\Engine\RendererBehaviour.cpp" />
     <ClCompile Include="src\Engine\Scene.cpp" />
     <ClCompile Include="src\Engine\SceneObject.cpp" />
+    <ClCompile Include="src\Engine\Shader.cpp" />
     <ClCompile Include="src\Engine\ShaderLoader.cpp" />
     <ClCompile Include="src\Engine\SphericalCoordinateBehaviour.cpp" />
     <ClCompile Include="src\Engine\Transform.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="src\Engine\RendererBehaviour.h" />
     <ClInclude Include="src\Engine\Scene.h" />
     <ClInclude Include="src\Engine\SceneObject.h" />
+    <ClInclude Include="src\Engine\Shader.h" />
     <ClInclude Include="src\Engine\ShaderLoader.h" />
     <ClInclude Include="src\Engine\SphericalCoordinateBehaviour.h" />
     <ClInclude Include="src\Engine\Transform.h" />

@@ -8,7 +8,6 @@ class CoordinateSystemRenderer : public RendererBehaviour
 	double segmentLength = 1;
 	double segmentNotchSize = 0.25;
 	Mesh* mesh = nullptr;
-	GLuint programID;
 
 	bool xAxis = true;
 	bool yAxis = true;

@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <iostream>
 
-Mesh::Mesh(const std::vector<GLfloat>& vertexData, const std::vector<GLfloat>& colorData, const GLuint& shaderID, GLint drawMode)
+Mesh::Mesh(const std::vector<GLfloat>& vertexData, const std::vector<GLfloat>& colorData, GLuint programID, GLint drawMode)
 {
 	assert(vertexData.size() == colorData.size());
 
@@ -12,7 +12,7 @@ Mesh::Mesh(const std::vector<GLfloat>& vertexData, const std::vector<GLfloat>& c
 	this->drawMode = drawMode;
 
 
-	shaderProgramID = shaderID;
+	shaderProgramID = programID;
 	MatrixID = glGetUniformLocation(shaderProgramID, "MVP");
 
 	glGenBuffers(1, &vertexBuffer);

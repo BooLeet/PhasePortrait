@@ -1,7 +1,4 @@
 #pragma once
-//#include "CameraBehaviour.h"
-//#include "RendererBehaviour.h"
-
 #include <vector>
 // Include GLEW
 #include <GL/glew.h>
@@ -19,6 +16,8 @@ class RendererBehaviour;
 
 class Input;
 
+class Shader;
+
 class Engine
 {
 private:
@@ -28,6 +27,7 @@ private:
 	double unscaledDeltaTime;
 	size_t windowWidth, windowHeight;
 	Input* input;
+	Shader* defaultShader;
 
 	bool CloseWindow();
 public:
@@ -80,5 +80,6 @@ public:
 
 	Input* GetInput() const;
 
-	void ConsoleLog(std::string str);
+	void ConsoleLog(std::string str) const;
+	const Shader& GetDefaultShader() const;
 };

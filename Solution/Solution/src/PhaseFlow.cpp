@@ -139,10 +139,9 @@ void PhaseFlow::PhasePointsSetup()
 			{
 				SceneObject* obj = engine->GetScene()->CreateObject("Trail");
 				TrailRenderer* trailRenderer = obj->AddBehaviour<TrailRenderer>();
-				trailRenderer->programID = programID;
 				trailRenderer->renderMode = renderMode;
-				trailRenderer->sampleLifeTime = 0.05;
-				trailRenderer->maxSamples = 25;
+				trailRenderer->sampleLifeTime = trailSampleLifeTime;
+				trailRenderer->maxSamples = trailMaxSamples;
 
 				std::vector<float> phasePosition(differentialEquation->GetOrder(), 0);
 
@@ -178,7 +177,11 @@ void PhaseFlow::ClearPhasePoints()
 void PhaseFlow::Simulation()
 {
 	if (simulationTimeCounter > simulationEndTime)
-		return;
+	{
+		simulationTimeCounter = 0;
+		for (PhasePointContainer& point : phasePoints)
+			point.trail->ClearTrail();
+	}
 
 	float fullTime = simulationEndTime - simulationStartTime;
 	for (PhasePointContainer& point : phasePoints)
@@ -192,8 +195,6 @@ void PhaseFlow::Simulation()
 		if (interpolationParameter < 0)
 			engine->ConsoleLog("PhaseFlow::Simulation() " + std::to_string(interpolationParameter));
 
-		//Vector<float> newPosition = point.trajectory[firstIndex].second;
-
 		Vector<float> newPosition = point.trajectory[firstIndex].second * (1 - interpolationParameter) + point.trajectory[secondIndex].second * interpolationParameter;
 
 		point.trail->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(newPosition));
@@ -206,7 +207,6 @@ void PhaseFlow::Start()
 {
 	CalculatorFunctionSetup();
 	PresetEquationsSetup();
-	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
 	coordinateRenderer = sceneObject->AddBehaviour<CoordinateSystemRenderer>();
 	coordinateRenderer->SetRadius(20);
 	coordinateRenderer->SetSegmentLength(1);
@@ -244,7 +244,6 @@ void PhaseFlow::Update()
 void PhaseFlow::OnDestroy()
 {
 	ClearPhasePoints();
-	glDeleteProgram(programID);
 	delete[] equationInput;
 	delete[] variablesInput;
 }
@@ -345,6 +344,15 @@ void PhaseFlow::SimulationWindowUI()
 	ImGui::InputFloat("Simulation time step", &simulationTimeStepVolatile);
 	if (simulationTimeStepVolatile <= 0)
 		simulationTimeStepVolatile = 0.001;
+
+	ImGui::Text("Trail settings");
+	ImGui::InputFloat("Sample life time", &trailSampleLifeTime);
+	if (trailSampleLifeTime <= 0)
+		trailSampleLifeTime = 0.01;
+
+	ImGui::InputInt("Max samples", &trailMaxSamples);
+	if (trailMaxSamples <= 1)
+		trailMaxSamples = 2;
 
 	if (ImGui::Button("Start"))
 		startSimulation = true;

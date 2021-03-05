@@ -9,5 +9,7 @@ public:
 	float angleW = 0;
 	float distance = 5;
 
+	float zoomSpeed = 2;
+
 	void Update();
 };

@@ -11,7 +11,6 @@ private:
 	float sampleTimeCounter = 0;
 public:
 	enum class RenderMode { Lines, Triangles, Points };
-	GLuint programID = 0;
 	RenderMode renderMode = RenderMode::Lines;
 	float sampleLifeTime = 0.1;
 	size_t maxSamples = 10;
@@ -25,4 +24,6 @@ public:
 	void Update();
 
 	void OnDestroyRenderer();
+
+	void ClearTrail();
 };
