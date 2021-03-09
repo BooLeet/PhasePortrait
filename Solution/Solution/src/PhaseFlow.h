@@ -37,13 +37,13 @@ class PhaseFlow : public RendererBehaviour
 	class PhasePointContainer
 	{
 	public:
-		std::vector< std::pair<double, Vector<float>>> trajectory;
+		std::vector< Vector<float>> trajectory;
 
-		PhasePointContainer(std::vector< std::pair<double, Vector<float>>> phaseTrajectory) :  trajectory(phaseTrajectory) {}
+		PhasePointContainer(std::vector< Vector<float>> phaseTrajectory) :  trajectory(phaseTrajectory) {}
 	};
 
 
-	std::vector<PhasePointContainer> phasePoints;
+	std::vector<std::vector< Vector<float>>> phasePoints;
 	//std::vector<std::pair<TrailRenderer*, std::vector<float> >> phasePoints;
 	
 	size_t xDiffOrder = 0;
@@ -68,10 +68,10 @@ class PhaseFlow : public RendererBehaviour
 	void PresetEquationsSetup();
 
 	// ¬озвращает фазовую траекторию точки
-	std::vector< std::pair<double, Vector<float>>> GetPhaseTrajectory(const std::vector<float>& startPosition, double startingTime, double endTime, double timeStep);
+	std::vector< Vector<float>> GetPhaseTrajectory(const std::vector<float>& startPosition, double startingTime, double endTime, double timeStep);
 
 	// ¬озвращает вектор скорости дл€ данной фазовой точки
-	Vector<float> GetPhaseSpeedVector(double t, const Vector<float>& point);
+	Vector<float> CalculateDerivativeVectorFunction(double t, const Vector<float>& point);
 
 	// ¬озвращает новую позицию точки в зависимости от выбранных фазовых осей визуализации
 	vec3 GetTrailPosition(const Vector<float>& phasePosition);

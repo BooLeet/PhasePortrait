@@ -66,7 +66,7 @@ void PhaseFlow::PresetEquationsSetup()
 	presetEquations.push_back(DifferentialEquationInput(2, "mu*(1-diff(0)*diff(0))*diff(1)-diff(0)", "mu = 0.1", "Van der Pol oscillator"));
 }
 
-std::vector< std::pair<double, Vector<float>>> PhaseFlow::GetPhaseTrajectory(const std::vector<float>& startPosition, double startingTime, double endTime, double timeStep)
+std::vector< Vector<float>> PhaseFlow::GetPhaseTrajectory(const std::vector<float>& startPosition, double startingTime, double endTime, double timeStep)
 {
 	if (startingTime > endTime)
 		std::swap(startingTime, endTime);
@@ -74,26 +74,26 @@ std::vector< std::pair<double, Vector<float>>> PhaseFlow::GetPhaseTrajectory(con
 
 	double tPrev = startingTime;
 	Vector<float> yPrev = startPosition;
-	std::vector< std::pair<double, Vector<float>>> result;
-	result.push_back(std::make_pair(tPrev, yPrev));
+	std::vector< Vector<float>> result;
+	result.push_back(yPrev);
 
 	for (size_t i = 1; i <= steps; ++i)
 	{
-		Vector<float> K1 = timeStep * GetPhaseSpeedVector(tPrev, yPrev);
-		Vector<float> K2 = timeStep * GetPhaseSpeedVector(tPrev + timeStep/2, yPrev + K1);
-		Vector<float> K3 = timeStep * GetPhaseSpeedVector(tPrev + timeStep / 2, yPrev + K2);
-		Vector<float> K4 = timeStep * GetPhaseSpeedVector(tPrev + timeStep, yPrev + K3);
+		Vector<float> K1 = timeStep * CalculateDerivativeVectorFunction(tPrev, yPrev);
+		Vector<float> K2 = timeStep * CalculateDerivativeVectorFunction(tPrev + timeStep/2, yPrev + K1);
+		Vector<float> K3 = timeStep * CalculateDerivativeVectorFunction(tPrev + timeStep / 2, yPrev + K2);
+		Vector<float> K4 = timeStep * CalculateDerivativeVectorFunction(tPrev + timeStep, yPrev + K3);
 
 		Vector<float> deltaY = (K1 + 2 * K2 + 2 * K3 + K4) * (1/6.0);
 		tPrev += timeStep;
 		yPrev = yPrev + deltaY;
-		result.push_back(std::make_pair(tPrev, yPrev));
+		result.push_back(yPrev);
 	}
 
 	return result;
 }
 
-Vector<float> PhaseFlow::GetPhaseSpeedVector(double t,const Vector<float>& point)
+Vector<float> PhaseFlow::CalculateDerivativeVectorFunction(double t,const Vector<float>& point)
 {
 	std::vector<float> result(differentialEquation->GetOrder());
 
@@ -150,8 +150,8 @@ void PhaseFlow::PhasePointsSetup()
 				if (differentialEquation->GetOrder() > zDiffOrder)
 					phasePosition[zDiffOrder] = 2 * simulationRadius * (k / (float)(samplePerDimension - 1) - 0.5);
 
-				std::vector< std::pair<double, Vector<float>>> phaseTrajectory = GetPhaseTrajectory(phasePosition, simulationStartTimeVolatile, simulationEndTimeVolatile, simulationTimeStepVolatile);
-				phasePoints.push_back(PhasePointContainer(phaseTrajectory));
+				std::vector< Vector<float>> phaseTrajectory = GetPhaseTrajectory(phasePosition, simulationStartTimeVolatile, simulationEndTimeVolatile, simulationTimeStepVolatile);
+				phasePoints.push_back(phaseTrajectory);
 			}
 
 	simulationStartTime = 0;
@@ -181,20 +181,20 @@ vec3 PhaseFlow::GetTrajectoryColor(float parameter)
 void PhaseFlow::Render(mat4 projectionViewMatrix)
 {
 	float fullTime = simulationEndTime - simulationStartTime;
-	for (PhasePointContainer& point : phasePoints)
+	for (std::vector< Vector<float>>& trajectory : phasePoints)
 	{
 		std::vector<GLfloat> vertexData;
 		std::vector<GLfloat> colorData;
 
 		size_t firstIndex = simulationTimeCounter / simulationTimeStep;
 		size_t secondIndex = firstIndex;
-		if (secondIndex < point.trajectory.size() - 1)
+		if (secondIndex < trajectory.size() - 1)
 			secondIndex++;
 
 		double interpolationParameter = (simulationTimeCounter - firstIndex * simulationTimeStep) / simulationTimeStep;
 
 		// Creating a head of the trajectory
-		vec3 headPosition = GetTrailPosition(point.trajectory[firstIndex].second * (1 - interpolationParameter) + point.trajectory[secondIndex].second * interpolationParameter);
+		vec3 headPosition = GetTrailPosition(trajectory[firstIndex] * (1 - interpolationParameter) + trajectory[secondIndex] * interpolationParameter);
 
 		vertexData.push_back(headPosition.x);
 		vertexData.push_back(headPosition.y);
@@ -211,7 +211,7 @@ void PhaseFlow::Render(mat4 projectionViewMatrix)
 		for (int i = firstIndex; i >= 0 && !endTrajectory; --i)
 		{
 			// Position
-			vec3 position = GetTrailPosition(point.trajectory[i].second);
+			vec3 position = GetTrailPosition(trajectory[i]);
 			float currentDistance = distance(previousPosition, position);
 			
 			if (currentLength + currentDistance >= trajectoryMaxLength)
@@ -368,6 +368,23 @@ void PhaseFlow::SimulationWindowUI()
 	if (ImGui::Button("Starting Menu"))
 		currentUIState = UIState::StartingMenu;
 
+	ImGui::Spacing();
+
+	// PLAYER
+	if (ImGui::Button("Start"))
+		startSimulation = true;
+
+	if (ImGui::Button("Stop"))
+		stopSimulation = true;
+
+	ImGui::Spacing();
+
+	static float timeScale = 1;
+	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 1.0f);
+	engine->timeScale = timeScale;
+
+	ImGui::SliderFloat("Simulation time", &simulationTimeCounter, simulationStartTime, simulationEndTime);
+
 	if (ImGui::CollapsingHeader("Simulation menu"))
 	{
 		int sampleCount = sampleSize;
@@ -392,19 +409,6 @@ void PhaseFlow::SimulationWindowUI()
 
 		ImGui::Separator();
 	}
-	ImGui::Spacing();
-
-	if (ImGui::Button("Start"))
-		startSimulation = true;
-
-	if (ImGui::Button("Stop"))
-		stopSimulation = true;
-
-	static float timeScale = 1;
-	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 1.0f);
-	engine->timeScale = timeScale;
-
-	ImGui::SliderFloat("Simulation time", &simulationTimeCounter, simulationStartTime, simulationEndTime);
 
 	// TRAJECTORY
 	ImGui::Spacing();
@@ -475,6 +479,15 @@ void PhaseFlow::SimulationWindowUI()
 			cameraHolder->Reset(10);
 
 		ImGui::InputFloat3("Pivot", &(cameraHolder->pivot[0]));
+		vec3 rotation = (180 / pi<float>()) * vec3(cameraHolder->angleU, cameraHolder->angleV, cameraHolder->angleW);
+		if (ImGui::InputFloat3("Rotation", &(rotation[0])))
+		{
+			rotation = (pi<float>() / 180) * rotation;
+			cameraHolder->angleU = rotation.x;
+			cameraHolder->angleV = rotation.y;
+			cameraHolder->angleW = rotation.z;
+		}
+
 
 		ImGui::Separator();
 	}
