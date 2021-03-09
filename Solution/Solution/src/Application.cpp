@@ -28,26 +28,44 @@ using namespace std::chrono;
 #include "Engine/Scene.h"
 #include "Engine/SceneObject.h"
 #include "Engine/ColoredCubeRenderer.h"
-#include "Engine/CameraBehaviour.h"
-#include "Engine/SphericalCoordinateBehaviour.h"
 #include "TrailRenderer.h"
 #include "PhaseFlow.h"
 #include "DifferentialEquation.h"
 
+std::pair<size_t, size_t> ReadWindowSize(std::string fileName = "windowConfig.txt");
 
 int main(void)
 {
-	Engine engine = Engine(1600, 900);
-	SceneObject* camera = engine.GetScene()->CreateObject("Camera");
-	camera->AddBehaviour<CameraBehaviour>();
-	camera->AddBehaviour<SphericalCoordinateBehaviour>()->distance = 12;
-	camera->transform.SetPosition(vec3(0, 0, 0));
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
+	//ShowWindow(GetConsoleWindow(), SW_HIDE);
+	std::pair<size_t, size_t> windowSize = ReadWindowSize();
+	Engine engine = Engine(windowSize.first, windowSize.second);
 
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
 
-	//ShowWindow(GetConsoleWindow(), SW_HIDE); 
+	
 	engine.MainLoop();
-	//ShowWindow(GetConsoleWindow(), SW_SHOW);
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
+}
+
+std::pair<size_t, size_t> ReadWindowSize(std::string fileName)
+{
+	std::fstream file(fileName);
+	
+	size_t width = 0;
+	size_t height = 0;
+
+	if (file.is_open() && file.good())
+		if (!(file >> width >> height))
+			width = height = 0;
+	
+	file.close();
+	if (width < 800)
+		width = 800;
+	if (height < 600)
+		height = 600;
+
+	return std::make_pair(width, height);
 }
 

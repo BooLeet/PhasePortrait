@@ -68,6 +68,7 @@ int Engine::MainLoop()
 
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow(windowWidth, windowHeight, "Window", NULL, NULL);
+	
 	input = new Input(window);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -138,8 +139,6 @@ int Engine::MainLoop()
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 		unscaledDeltaTime = duration.count() * 0.000001;
-		//std::cout << "Object Count = " << scene->GetObjectCount() << '\n';
-		//std::cout << "FPS: " << 1 / unscaledDeltaTime << '\n';
 
 		// To prevent bugs caused by big lags
 		if (unscaledDeltaTime >= 0.05)

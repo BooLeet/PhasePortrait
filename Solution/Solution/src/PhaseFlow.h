@@ -8,6 +8,7 @@
 
 class DifferentialEquation;
 class CoordinateSystemRenderer;
+class SphericalCoordinateBehaviour;
 
 class PhaseFlow : public RendererBehaviour
 {
@@ -55,6 +56,7 @@ class PhaseFlow : public RendererBehaviour
 	DifferentialEquation* differentialEquation = nullptr;
 
 	CoordinateSystemRenderer* coordinateRenderer = nullptr;
+	SphericalCoordinateBehaviour* cameraHolder = nullptr;
 
 	// Вычисляет правую часть дифференциального уравнения для данной фазовой точки
 	float CalculateDifferentialEquation(double t, const Vector<float>& point);

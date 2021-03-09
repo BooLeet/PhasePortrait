@@ -16,7 +16,25 @@
 
 using namespace glm;
 
-void SphericalCoordinateBehaviour::Update()
+void SphericalCoordinateBehaviour::LateUpdate()
+{
+	vec3 rotation = vec3(-angleV, angleU, angleW);
+	vec3 position = vec3(distance * sin(angleU) * cos(angleV),
+		distance * sin(angleV),
+		distance * cos(angleU) * cos(angleV));
+	position = position + pivot;
+
+	sceneObject->transform.SetPosition(position);
+	sceneObject->transform.SetRotation(rotation);
+}
+
+void SphericalCoordinateBehaviour::Reset(float newDistance)
+{
+	angleU = angleV = angleW = 0;
+	distance = newDistance;
+}
+
+void SphericalCoordinateBehaviour::HandleInput()
 {
 	if (engine->GetInput()->GetKey(GLFW_KEY_RIGHT))
 		angleU += engine->GetUnscaledDeltaTime();
@@ -44,12 +62,4 @@ void SphericalCoordinateBehaviour::Update()
 		distance -= currentZoomSpeed * engine->GetUnscaledDeltaTime();
 	if (engine->GetInput()->GetKey(GLFW_KEY_S))
 		distance += currentZoomSpeed * engine->GetUnscaledDeltaTime();
-
-	vec3 rotation = vec3(-angleV, angleU, angleW);
-	vec3 position = vec3(distance * sin(angleU) * cos(angleV),
-		distance * sin(angleV),
-		distance * cos(angleU) * cos(angleV));
-
-	sceneObject->transform.SetPosition(position);
-	sceneObject->transform.SetRotation(rotation);
 }

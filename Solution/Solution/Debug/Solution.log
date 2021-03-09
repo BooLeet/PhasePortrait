@@ -1,2 +1,392 @@
-﻿  Engine.cpp
+﻿  Application.cpp
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(13,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(21,40): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10): message : while compiling class template member function 'Vector<float>::Vector(size_t,double)'
+D:\GitHub\PhasePortrait\Solution\Solution\src\Application.cpp(69): message : see reference to function template instantiation 'Vector<float>::Vector(size_t,double)' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(54): message : see reference to class template instantiation 'Vector<float>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(669): message : see reference to class template instantiation 'std::chrono::duration<double,std::ratio<1,1>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(177): message : see reference to class template instantiation 'std::chrono::duration<__int64,std::nano>' being compiled
+  CoordinateSystemRenderer.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\chrono(647): message : see reference to class template instantiation 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(58,26): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(63,24): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(63,24): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(63,24): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(63,24): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(63,24): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(67,24): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(67,24): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(67,24): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(67,24): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(67,24): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(75,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(75,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(75,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(75,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(75,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(76,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(76,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(76,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(76,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(76,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(79,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(79,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(79,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(79,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(79,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(80,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(80,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(80,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(80,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(80,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(83,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(83,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(83,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(83,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(83,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(84,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(84,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(84,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(84,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(84,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(87,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(87,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(87,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(87,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(87,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(88,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(88,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(88,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(88,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(88,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(94,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(94,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(94,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(94,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(94,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(96,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(96,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(96,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(96,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(96,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(98,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(98,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(98,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(98,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(98,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(100,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(100,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(100,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(100,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(100,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(102,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(102,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(102,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(102,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(102,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(104,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(104,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(104,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(104,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(104,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(106,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(106,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(106,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(106,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(106,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(108,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(108,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(108,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(108,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(108,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(116,24): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(116,24): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(116,24): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(116,24): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(116,24): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(120,24): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(120,24): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(120,24): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(120,24): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(120,24): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(127,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(127,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(127,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(127,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(127,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(128,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(128,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(128,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(128,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(128,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(131,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(131,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(131,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(131,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(131,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(132,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(132,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(132,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(132,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(132,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(135,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(135,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(135,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(135,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(135,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(136,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(136,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(136,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(136,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(136,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(139,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(139,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(139,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(139,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(139,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(140,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(140,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(140,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(140,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(140,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(147,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(147,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(147,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(147,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(147,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(148,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(148,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(148,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(148,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(148,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(151,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(151,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(151,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(151,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(151,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(152,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(152,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(152,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(152,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(152,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(155,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(155,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(155,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(155,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(155,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(156,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(156,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(156,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(156,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(156,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(159,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(159,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(159,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(159,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(159,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(160,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(160,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(160,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(160,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(160,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(169,24): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(169,24): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(169,24): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(169,24): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(169,24): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(173,24): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(173,24): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(173,24): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(173,24): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(173,24): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(179,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(179,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(179,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(179,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(179,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(181,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(181,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(181,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(181,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(181,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(183,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(183,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(183,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(183,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(183,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(185,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(185,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(185,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(185,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(185,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(187,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(187,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(187,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(187,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(187,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(189,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(189,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(189,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(189,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(189,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(191,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(191,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(191,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(191,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(191,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(193,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(193,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(193,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(193,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(193,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(199,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(199,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(199,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(199,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(199,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(200,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(200,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(200,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(200,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(200,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(203,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(203,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(203,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(203,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(203,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(204,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(204,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(204,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(204,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(204,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(207,26): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(207,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(207,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(207,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(207,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(208,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(208,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(208,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(208,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(208,28): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(211,26): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(211,26): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(211,26): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(211,26): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(211,26): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(212,28): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(212,28): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(212,28): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(212,28): warning C4244:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(212,28): warning C4244:         ]
+  CameraBehaviour.cpp
+  ColoredCubeRenderer.cpp
+  Engine.cpp
+  Mesh.cpp
+  RendererBehaviour.cpp
+  Scene.cpp
+  SceneObject.cpp
+  Shader.cpp
+  ShaderLoader.cpp
+  SphericalCoordinateBehaviour.cpp
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(217,56): warning C4305: 'argument': truncation from 'double' to 'const _Ty'
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(217,56): warning C4305:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(217,56): warning C4305:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(217,56): warning C4305:             _Ty=GLfloat
+D:\GitHub\PhasePortrait\Solution\Solution\src\CoordinateSystemRenderer.cpp(217,56): warning C4305:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(39,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(41,43): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(44,43): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(46,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(49,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(51,43): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(61,64): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  PhaseFlow.cpp
+D:\GitHub\PhasePortrait\Solution\Solution\src\Engine\SphericalCoordinateBehaviour.cpp(63,64): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(21,40): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\ColorUtility.h(21,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\ColorUtility.h(42,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\ColorUtility.h(43,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\ColorUtility.h(44,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(33,16): warning C4244: 'return': conversion from '_Ty1' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(33,16): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(33,16): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(33,16): warning C4244:             _Ty1=double
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(33,16): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(59,134): warning C4244: 'argument': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(73,15): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(87,63): warning C4305: 'argument': truncation from 'double' to 'T'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(87,63): warning C4305:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(87,63): warning C4305:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(87,63): warning C4305:             T=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(87,63): warning C4305:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(129,28): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(131,28): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(145,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(145,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(145,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(145,55): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(145,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(148,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(148,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(148,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(148,55): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(148,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(151,55): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(151,55): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(151,55): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(151,55): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(151,55): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(189,21): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,81): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,81): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,81): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,81): warning C4244:             T=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,81): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,148): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,148): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,148): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,148): warning C4244:             T=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(197,148): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(277,49): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(315,60): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(354,60): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(384,27): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(394,38): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(418,30): warning C4305: '=': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(455,37): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(482,60): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:             T=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(47,16): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(46): message : while compiling class template member function 'Vector<float> operator *(double,const Vector<float> &)'
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(82): message : see reference to function template instantiation 'Vector<float> operator *(double,const Vector<float> &)' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.h(54): message : see reference to class template instantiation 'Vector<float>' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244: 'argument': conversion from 'double' to 'const _Ty', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         with
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         [
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:             _Ty=float
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10,76): warning C4244:         ]
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(10): message : while compiling class template member function 'Vector<float>::Vector(size_t,double)'
+  TrailRenderer.cpp
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(38): message : see reference to function template instantiation 'Vector<float>::Vector(size_t,double)' being compiled
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.h(13,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(33,21): warning C4018: '<': signed/unsigned mismatch
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(52,21): warning C4018: '<': signed/unsigned mismatch
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(109,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+D:\GitHub\PhasePortrait\Solution\Solution\src\TrailRenderer.cpp(113,16): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+D:\GitHub\PhasePortrait\Solution\Solution\src\ColorUtility.h(10): warning C4715: 'Clamp': not all control paths return a value
+D:\GitHub\PhasePortrait\Solution\Solution\src\PhaseFlow.cpp(179): warning C4715: 'PhaseFlow::GetTrajectoryColor': not all control paths return a value
+D:\GitHub\PhasePortrait\Solution\Solution\src\Vector.h(62): warning C4172: returning address of local variable or temporary
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\GitHub\PhasePortrait\Solution\Debug\vc120.pdb'; linking object as if no debug info
   Solution.vcxproj -> D:\GitHub\PhasePortrait\Solution\Debug\Solution.exe

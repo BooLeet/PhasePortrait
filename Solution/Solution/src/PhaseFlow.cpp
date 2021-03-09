@@ -12,6 +12,8 @@
 #include "DifferentialEquation.h"
 #include "CoordinateSystemRenderer.h"
 #include "ColorUtility.h"
+#include "Engine/CameraBehaviour.h"
+#include "Engine/SphericalCoordinateBehaviour.h"
 
 #include "Vector.h"
 
@@ -238,7 +240,6 @@ void PhaseFlow::Render(mat4 projectionViewMatrix)
 		}
 		Mesh meshToDraw = Mesh(vertexData, colorData, engine->GetDefaultShader().GetProgram(), GL_LINE_STRIP);
 		meshToDraw.Render(projectionViewMatrix, sceneObject->transform.GetModelMatrix());
-		/*point.trail->GetSceneObject()->transform.SetPosition(GetNewTrailPosition(newPosition));*/
 	}
 }
 
@@ -250,6 +251,13 @@ void PhaseFlow::Start()
 	coordinateRenderer->SetRadius(20);
 	coordinateRenderer->SetSegmentLength(1);
 	coordinateRenderer->SetSegmentNotchSize(0.1);
+
+
+	SceneObject* camera = engine->GetScene()->CreateObject("Camera");
+	camera->AddBehaviour<CameraBehaviour>();
+	cameraHolder = camera->AddBehaviour<SphericalCoordinateBehaviour>();
+	camera->transform.SetPosition(vec3(0, 0, 0));
+	cameraHolder->distance = 10;
 }
 
 void PhaseFlow::Update()
@@ -270,7 +278,7 @@ void PhaseFlow::Update()
 
 	if (simulationTimeCounter > simulationEndTime)
 		simulationTimeCounter = simulationEndTime;
-	//ImGui::ShowDemoWindow();
+	
 	HandleUI();
 }
 
@@ -279,6 +287,7 @@ void PhaseFlow::OnDestroyRenderer()
 	ClearPhasePoints();
 	delete[] equationInput;
 	delete[] variablesInput;
+	cameraHolder->GetSceneObject()->Destroy();
 }
 
 void PhaseFlow::SetDifferentialEquation(DifferentialEquation* differentialEquationReference)
@@ -343,7 +352,7 @@ void PhaseFlow::SimulationWindowUI()
 {
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
 	ImGui::SetNextWindowContentWidth(engine->GetWindowWidth() / 3);
-	ImGui::Begin("Simulation Controls");
+	ImGui::Begin("Simulation Controls",nullptr,ImGuiWindowFlags_NoSavedSettings);
 
 	ImGui::Text("%.1f FPS (%.3f ms)", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
 	ImGui::Text("Differential Equation:");
@@ -458,6 +467,19 @@ void PhaseFlow::SimulationWindowUI()
 			ImGui::Separator();
 		}
 	
+	// CAMERA HOLDER INPUT
+	ImGui::Spacing();
+	if (ImGui::CollapsingHeader("Camera settings"))
+	{
+		if (ImGui::Button("Reset camera"))
+			cameraHolder->Reset(10);
+
+		ImGui::InputFloat3("Pivot", &(cameraHolder->pivot[0]));
+
+		ImGui::Separator();
+	}
+	cameraHolder->HandleInput();
+
 	ImGui::End();
 }
 
