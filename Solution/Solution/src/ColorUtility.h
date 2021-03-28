@@ -1,19 +1,12 @@
 #pragma once
 #include "Engine/OpenGLComponents.h"
-
-float Clamp(float val, float min, float max)
-{
-	if (val < min)
-		return min;
-	if (val > max)
-		return max;
-}
+#include "Engine/Utility.h"
 
 vec3 HSVtoRGB(float H, float S, float V) 
 {
-	H = Clamp(H, 0, 360);
-	S = Clamp(S, 0, 100);
-	V = Clamp(V, 0, 100);
+	H = Clamp<float>(H, 0, 360);
+	S = Clamp<float>(S, 0, 100);
+	V = Clamp<float>(V, 0, 100);
 
 	float s = S / 100;
 	float v = V / 100;
@@ -54,6 +47,6 @@ vec3 GetColorRainbow(float parameter)
 
 vec3 GetInterpolatedColor(float parameter, const vec3& colorA, const vec3& colorB)
 {
-	parameter = Clamp(parameter, 0, 1);
+	parameter = Clamp<float>(parameter, 0, 1);
 	return (1 - parameter) * colorA + parameter * colorB;
 }

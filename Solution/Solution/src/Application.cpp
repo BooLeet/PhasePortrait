@@ -32,14 +32,14 @@ using namespace std::chrono;
 #include "PhaseFlow.h"
 #include "DifferentialEquation.h"
 
-std::pair<size_t, size_t> ReadWindowSize(std::string fileName = "windowConfig.txt");
+std::tuple<size_t, size_t, bool> ReadWindowSize(std::string fileName = "windowConfig.txt");
 
 int main(void)
 {
 	ShowWindow(GetConsoleWindow(), SW_SHOW);
 	//ShowWindow(GetConsoleWindow(), SW_HIDE);
-	std::pair<size_t, size_t> windowSize = ReadWindowSize();
-	Engine engine = Engine(windowSize.first, windowSize.second);
+	std::tuple<size_t, size_t, bool> windowSize = ReadWindowSize("windowConfig.txt");
+	Engine engine = Engine(std::get<0>(windowSize), std::get<1>(windowSize), std::get<2>(windowSize));
 
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
 	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
@@ -49,15 +49,16 @@ int main(void)
 	ShowWindow(GetConsoleWindow(), SW_SHOW);
 }
 
-std::pair<size_t, size_t> ReadWindowSize(std::string fileName)
+std::tuple<size_t, size_t,bool> ReadWindowSize(std::string fileName)
 {
 	std::fstream file(fileName);
 	
 	size_t width = 0;
 	size_t height = 0;
+	bool fullScreen = false;
 
 	if (file.is_open() && file.good())
-		if (!(file >> width >> height))
+		if (!(file >> width >> height >> fullScreen))
 			width = height = 0;
 	
 	file.close();
@@ -66,6 +67,6 @@ std::pair<size_t, size_t> ReadWindowSize(std::string fileName)
 	if (height < 600)
 		height = 600;
 
-	return std::make_pair(width, height);
+	return { width,height,fullScreen };
 }
 

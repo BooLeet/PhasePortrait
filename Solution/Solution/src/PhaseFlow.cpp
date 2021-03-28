@@ -12,6 +12,7 @@
 #include "DifferentialEquation.h"
 #include "CoordinateSystemRenderer.h"
 #include "ColorUtility.h"
+#include "Engine/Utility.h"
 #include "Engine/CameraBehaviour.h"
 #include "Engine/SphericalCoordinateBehaviour.h"
 
@@ -55,6 +56,7 @@ void PhaseFlow::CalculatorFunctionSetup()
 	calculatorFunctions.insert(std::make_pair("sqrt", [](std::stack<double>& args) {return std::sqrt(StackPopReturn(args)); }));
 
 	calculatorFunctions.insert(std::make_pair("sign", [](std::stack<double>& args) {double val = StackPopReturn(args); return val / abs(val); }));
+	calculatorFunctions.insert(std::make_pair("abs", [](std::stack<double>& args) {return std::abs(StackPopReturn(args)); }));
 
 	calculatorFunctions.insert(std::make_pair("diff", [this](std::stack<double>& args) {return currentPointForCalculation[StackPopReturn(args)]; }));
 
@@ -208,6 +210,8 @@ void PhaseFlow::Render(mat4 projectionViewMatrix)
 		vec3 previousPosition = headPosition;
 		float currentLength = 0;
 		bool endTrajectory = false;
+		float currentEdgeLength = 0;
+
 		for (int i = firstIndex; i >= 0 && !endTrajectory; --i)
 		{
 			// Position
@@ -223,6 +227,12 @@ void PhaseFlow::Render(mat4 projectionViewMatrix)
 				currentDistance = trajectoryMaxLength - currentLength;
 			}
 			
+
+			currentEdgeLength += currentDistance;
+			if (currentEdgeLength < trajectoryMinEdgeLength)
+				continue;
+			currentEdgeLength = 0;
+
 			vertexData.push_back(position.x);
 			vertexData.push_back(position.y);
 			vertexData.push_back(position.z);
@@ -323,6 +333,25 @@ void PhaseFlow::EquationSettingUI()
 	ImGui::InputText("", equationInput, 100);
 	ImGui::InputTextMultiline("Variables", variablesInput, 100);
 	
+	ImGui::Spacing();
+
+	if (diffEqOrder > 1)
+	{
+		int xOrder = xDiffOrder;
+		ImGui::InputInt("x diff order", &xOrder);
+		xDiffOrder = Clamp<int>(xOrder, 0, diffEqOrder - 1);
+
+		int yOrder = yDiffOrder;
+		ImGui::InputInt("y diff order", &yOrder);
+		yDiffOrder = Clamp<int>(yOrder, 0, diffEqOrder - 1);
+	}
+
+	if (diffEqOrder > 2)
+	{
+		int zOrder = zDiffOrder;
+		ImGui::InputInt("z diff order", &zOrder);
+		zDiffOrder = Clamp<int>(zOrder, 0, diffEqOrder - 1);
+	}
 
 
 	if (ImGui::Button("Confirm Equation"))
@@ -363,10 +392,16 @@ void PhaseFlow::SimulationWindowUI()
 		ImGui::Text(("Error: " + equationErrorMessage).c_str());
 
 	if (ImGui::Button("Edit Equation"))
+	{
+		stopSimulation = true;
 		currentUIState = UIState::EquationSetting;
-
+	}
+		
 	if (ImGui::Button("Starting Menu"))
+	{
+		stopSimulation = true;
 		currentUIState = UIState::StartingMenu;
+	}
 
 	ImGui::Spacing();
 
@@ -380,11 +415,12 @@ void PhaseFlow::SimulationWindowUI()
 	ImGui::Spacing();
 
 	static float timeScale = 1;
-	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 1.0f);
+	ImGui::SliderFloat("Simulation speed", &timeScale, 0.0f, 10.0f);
 	engine->timeScale = timeScale;
 
 	ImGui::SliderFloat("Simulation time", &simulationTimeCounter, simulationStartTime, simulationEndTime);
 
+	// SIMULATION
 	if (ImGui::CollapsingHeader("Simulation menu"))
 	{
 		int sampleCount = sampleSize;
@@ -418,7 +454,10 @@ void PhaseFlow::SimulationWindowUI()
 		if (trajectoryMaxLength <= 0)
 			trajectoryMaxLength = 0.01;
 
-
+		ImGui::InputFloat("Min edge length", &trajectoryMinEdgeLength);
+		if (trajectoryMinEdgeLength <= 0)
+			trajectoryMinEdgeLength = 0;
+		
 		const char* colorModes[] = { "Single Color", "Two Color", "Rainbow"};
 
 		if (ImGui::Button("Select color mode"))
@@ -468,6 +507,22 @@ void PhaseFlow::SimulationWindowUI()
 
 			if (ImGui::InputFloat("Segment notch size", &segmentNotchSize))
 				coordinateRenderer->SetSegmentNotchSize(segmentNotchSize);
+
+			ImGui::Spacing();
+
+			vec3 xColor = coordinateRenderer->GetColorX();
+			vec3 yColor = coordinateRenderer->GetColorY();
+			vec3 zColor = coordinateRenderer->GetColorZ();
+
+			if (ImGui::ColorPicker3("Color X", &xColor[0]))
+				coordinateRenderer->SetColorX(xColor);
+			
+			if (ImGui::ColorPicker3("Color Y", &yColor[0]))
+				coordinateRenderer->SetColorY(yColor);
+
+			if (ImGui::ColorPicker3("Color Z", &zColor[0]))
+				coordinateRenderer->SetColorZ(zColor);
+
 			ImGui::Separator();
 		}
 	
@@ -530,6 +585,10 @@ void PhaseFlow::StartingMenuUI()
 			currentUIState = UIState::EquationSetting;
 		}
 	}
+
+	ImGui::Spacing();
+	if (ImGui::Button("Quit"))
+		engine->Quit();
 
 	ImGui::End();
 }

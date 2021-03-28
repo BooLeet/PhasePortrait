@@ -10,7 +10,7 @@ class CameraBehaviour : public ObjectBehaviour
 {
 public:
 	float fieldOfView = 75;
-	float nearPlane = 0.1f;
+	float nearPlane = 0.01f;
 	float farPlane = 500;
 
 	void Awake();

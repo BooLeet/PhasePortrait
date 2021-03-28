@@ -27,6 +27,7 @@ class PhaseFlow : public RendererBehaviour
 	float simulationTimeStep = 0;
 
 	float trajectoryMaxLength = 10;
+	float trajectoryMinEdgeLength = 0.001;
 
 	enum class TrajectoryColorMode { SingleColor, TwoColor, Rainbow };
 	TrajectoryColorMode currentColorMode = TrajectoryColorMode::TwoColor;
@@ -108,7 +109,7 @@ private:
 	UIState currentUIState = UIState::StartingMenu;
 	char* equationInput = new char[100]();
 	char* variablesInput = new char[100]();
-	int diffEqOrder = 1;
+	int diffEqOrder = 2;
 	std::string equationErrorMessage;
 
 	struct DifferentialEquationInput

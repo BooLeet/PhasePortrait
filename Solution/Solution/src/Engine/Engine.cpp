@@ -32,10 +32,11 @@ using namespace std::chrono;
 
 #include "ShaderLoader.h"
 
-Engine::Engine(size_t windowWidth, size_t windowHeight)
+Engine::Engine(size_t windowWidth, size_t windowHeight, bool fullscreen)
 {
 	this->windowWidth = windowWidth;
 	this->windowHeight = windowHeight;
+	this->fullScreen = fullscreen;
 	timeScale = 1;
 	unscaledDeltaTime = 0;
 	scene = new Scene(this);
@@ -67,7 +68,7 @@ int Engine::MainLoop()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(windowWidth, windowHeight, "Window", NULL, NULL);
+	window = glfwCreateWindow(windowWidth, windowHeight, "Window",fullScreen? glfwGetPrimaryMonitor() : NULL, NULL);
 	
 	input = new Input(window);
 	if (window == NULL) {
@@ -195,10 +196,14 @@ const Shader& Engine::GetDefaultShader() const
 	return *defaultShader;
 }
 
+void Engine::Quit()
+{
+	quitFlag = true;
+}
+
 bool Engine::CloseWindow()
 {
-	return glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS ||
-		glfwWindowShouldClose(window) == 1;
+	return glfwWindowShouldClose(window) == 1 || quitFlag;
 }
 
 void Engine::CameraRegistry::RegisterCamera(CameraBehaviour* cam)

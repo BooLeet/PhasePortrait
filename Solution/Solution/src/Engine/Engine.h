@@ -26,8 +26,10 @@ private:
 	
 	double unscaledDeltaTime;
 	size_t windowWidth, windowHeight;
+	bool fullScreen;
 	Input* input;
 	Shader* defaultShader;
+	bool quitFlag = false;
 
 	bool CloseWindow();
 public:
@@ -66,7 +68,7 @@ public:
 	CameraRegistry cameraRegistry;
 	RendererRegistry rendererRegistry;
 
-	Engine(size_t windowWidth, size_t windowHeight);
+	Engine(size_t windowWidth, size_t windowHeight,bool fullscreen);
 	~Engine();
 	// Main engine loop
 	int MainLoop();
@@ -82,4 +84,6 @@ public:
 
 	void ConsoleLog(std::string str) const;
 	const Shader& GetDefaultShader() const;
+
+	void Quit();
 };
