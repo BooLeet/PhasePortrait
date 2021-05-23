@@ -1,10 +1,6 @@
 #pragma once
 #include <vector>
-// Include GLEW
-#include <GL/glew.h>
-
-// Include GLFW
-#include <GLFW/glfw3.h>
+#include "OpenGLComponents.h"
 
 #include <string>
 
@@ -33,6 +29,7 @@ private:
 
 	bool CloseWindow();
 public:
+	vec3 clearColor = vec3(0, 0, 0);
 	double timeScale;
 
 	// Has references for all the renderers on the scene

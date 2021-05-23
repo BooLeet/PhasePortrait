@@ -16,25 +16,27 @@ class ObjectBehaviour;
 
 class SceneObject
 {
+public:
+	std::string name;
 private:
+	Transform transform;
+	bool destructionFlag;
+
 	Scene* scene;
 	Engine* engine;
 	std::vector<ObjectBehaviour*> behaviours;
 
-	void RemoveBehaviour(const std::vector<ObjectBehaviour*>::iterator& iterator);
-	bool shouldBeDestroyed;
-
 public:
-	Transform transform;
-	std::string name;
-
 	SceneObject(Scene* scene, std::string name);
 	~SceneObject();
+
+	// Returns the object's transform
+	Transform& GetTransform();
 
 	// Returns an engine pointer
 	Engine* GetEnginePointer() const { return engine; }
 
-	// Removes an object from the scene
+	// Sets the destruction flag to true
 	void Destroy();
 
 	bool GetDestructionFlag() const;
@@ -95,4 +97,8 @@ public:
 
 	// Calls Update and LateUpdate on all behaviours
 	void UpdateBehaviours();
+
+private:
+	// Removes a given behaviour
+	void RemoveBehaviour(const std::vector<ObjectBehaviour*>::iterator& iterator);
 };

@@ -5,7 +5,7 @@
 #include <stack>
 #include <vector>
 
-using function = std::function<double(std::stack<double>&)>; // Функция калькулятора, сама вытаскивает из стека необходимые параметры
+using calcFunction = std::function<double(std::stack<double>&)>; // Функция калькулятора, сама вытаскивает из стека необходимые параметры
 
 // Извлекает и возвращает верхушку стека
 double StackPopReturn(std::stack<double>& stack);
@@ -53,10 +53,10 @@ public:
 	static Expression ReadExpression(std::istream& stream);
 
 	// Вычисление выражения по заданному выражению и ассоциативному массиву функций
-	double EvaluateExpression(std::map<std::string, function >& functions);
+	double EvaluateExpression(std::map<std::string, calcFunction >& functions);
 
 	// Вычисление выражения по заданному выражению и ассоциативному массиву функций и запись первой попавшейся ошибки
-	std::pair<double,std::string> EvaluateExpressionAndGetError(std::map<std::string, function >& functions);
+	std::pair<double,std::string> EvaluateExpressionAndGetError(std::map<std::string, calcFunction >& functions);
 
 	std::string GetString() const;
 

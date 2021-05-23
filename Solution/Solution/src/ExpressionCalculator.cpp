@@ -219,7 +219,7 @@ Expression Expression::ReadExpression(std::istream& stream)
 	return result;
 }
 
-double Expression::EvaluateExpression(std::map<std::string, function>& functions)
+double Expression::EvaluateExpression(std::map<std::string, calcFunction>& functions)
 {
 	std::stack<double> stack;
 
@@ -236,7 +236,7 @@ double Expression::EvaluateExpression(std::map<std::string, function>& functions
 	return stack.top();
 }
 
-std::pair<double, std::string> Expression::EvaluateExpressionAndGetError(std::map<std::string, function>& functions)
+std::pair<double, std::string> Expression::EvaluateExpressionAndGetError(std::map<std::string, calcFunction>& functions)
 {
 	std::stack<double> stack;
 

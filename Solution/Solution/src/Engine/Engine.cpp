@@ -123,7 +123,9 @@ int Engine::MainLoop()
 	{
 		auto start = high_resolution_clock::now();
 		// Clear the screen
+		glClearColor(clearColor.r, clearColor.g, clearColor.b, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
 		ImGui_ImplGlfwGL3_NewFrame();
 
 		scene->UpdateAllObjects();
@@ -228,7 +230,6 @@ void Engine::CameraRegistry::RenderCameras(const Engine::RendererRegistry& rende
 {
 	for (CameraBehaviour* camera : cameras)
 	{
-		mat4 projectionView = camera->GetProjectionViewMatrix();
 		rendererRegistry.RenderAll(camera);
 	}
 }

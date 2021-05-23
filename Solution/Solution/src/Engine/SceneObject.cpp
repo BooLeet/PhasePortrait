@@ -9,18 +9,17 @@ SceneObject::SceneObject(Scene* scene, std::string name)
 	this->engine = scene->GetEnginePointer();
 	this->transform = Transform();
 	this->name = name;
-	shouldBeDestroyed = false;
+	destructionFlag = false;
 }
 
 void SceneObject::Destroy()
 {
-	shouldBeDestroyed = true;
-	//scene->DestroyObject(this);
+	destructionFlag = true;
 }
 
 bool SceneObject::GetDestructionFlag() const
 {
-	return shouldBeDestroyed;
+	return destructionFlag;
 }
 
 
@@ -32,11 +31,6 @@ SceneObject::~SceneObject()
 void SceneObject::RemoveBehaviour(const std::vector<ObjectBehaviour*>::iterator& iterator)
 {
 	(*iterator)->MarkToRemove();
-
-	/*(*iterator)->OnDestroy();
-	delete* iterator;
-	std::iter_swap(iterator, behaviours.end() - 1);
-	behaviours.pop_back();*/
 }
 
 void SceneObject::RemoveBehaviours()
@@ -54,7 +48,7 @@ void SceneObject::UpdateBehaviours()
 {
 	for (size_t i = 0; i < behaviours.size(); ++i)
 	{
-		if (behaviours[i]->GetRemoveMark())
+		if (behaviours[i]->GetRemoveFlag())
 		{
 			behaviours[i]->OnDestroy();
 			delete behaviours[i];
@@ -67,17 +61,16 @@ void SceneObject::UpdateBehaviours()
 		behaviours[i]->TryAwake();
 
 	for (size_t i = 0; i < behaviours.size(); ++i)
+		behaviours[i]->TryStart();
+
+	for (size_t i = 0; i < behaviours.size(); ++i)
 		behaviours[i]->TryUpdate();
 
 	for (size_t i = 0; i < behaviours.size(); ++i)
 		behaviours[i]->TryLateUpdate();
+}
 
-	/*for (ObjectBehaviour* behaviour : behaviours)
-		behaviour->TryAwake();
-
-	for (ObjectBehaviour* behaviour : behaviours)
-		behaviour->TryUpdate();
-
-	for (ObjectBehaviour* behaviour : behaviours)
-		behaviour->TryLateUpdate();*/
+Transform& SceneObject::GetTransform()
+{
+	return transform;
 }

@@ -136,7 +136,6 @@
     <ClCompile Include="src\Engine\Input.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Engine\CameraBehaviour.cpp" />
-    <ClCompile Include="src\Engine\ColoredCubeRenderer.cpp" />
     <ClCompile Include="src\Engine\Engine.cpp" />
     <ClCompile Include="src\Engine\Mesh.cpp" />
     <ClCompile Include="src\Engine\ObjectBehaviour.cpp" />
@@ -148,8 +147,7 @@
     <ClCompile Include="src\Engine\SphericalCoordinateBehaviour.cpp" />
     <ClCompile Include="src\Engine\Transform.cpp" />
     <ClCompile Include="src\ExpressionCalculator.cpp" />
-    <ClCompile Include="src\PhaseFlow.cpp" />
-    <ClCompile Include="src\TrailRenderer.cpp" />
+    <ClCompile Include="src\PhasePortrait.cpp" />
     <ClCompile Include="src\Engine\vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\Engine\vendor\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\Engine\vendor\imgui\imgui_draw.cpp" />
@@ -162,7 +160,6 @@
     <ClInclude Include="src\Engine\EngineLibrary.h" />
     <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Engine\CameraBehaviour.h" />
-    <ClInclude Include="src\Engine\ColoredCubeRenderer.h" />
     <ClInclude Include="src\Engine\Engine.h" />
     <ClInclude Include="src\Engine\Mesh.h" />
     <ClInclude Include="src\Engine\ObjectBehaviour.h" />
@@ -176,8 +173,7 @@
     <ClInclude Include="src\Engine\Transform.h" />
     <ClInclude Include="src\Engine\Utility.h" />
     <ClInclude Include="src\ExpressionCalculator.h" />
-    <ClInclude Include="src\PhaseFlow.h" />
-    <ClInclude Include="src\TrailRenderer.h" />
+    <ClInclude Include="src\PhasePortrait.h" />
     <ClInclude Include="src\Engine\vendor\imgui\imconfig.h" />
     <ClInclude Include="src\Engine\vendor\imgui\imgui.h" />
     <ClInclude Include="src\Engine\vendor\imgui\imgui_impl_glfw_gl3.h" />

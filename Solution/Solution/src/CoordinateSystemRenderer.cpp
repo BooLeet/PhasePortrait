@@ -4,7 +4,7 @@
 
 void CoordinateSystemRenderer::Render(mat4 projectionViewMatrix)
 {
-	mesh->Render(projectionViewMatrix, sceneObject->transform.GetModelMatrix());
+	mesh->Render(projectionViewMatrix, sceneObject->GetTransform().GetModelMatrix());
 }
 
 void CoordinateSystemRenderer::Start()

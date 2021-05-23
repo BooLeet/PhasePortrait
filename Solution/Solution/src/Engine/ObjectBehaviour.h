@@ -5,18 +5,23 @@ class Engine;
 
 class ObjectBehaviour
 {
+public:
+	bool enabled = true;
 private:
 	bool hasAwoken = false;
-	bool shouldBeRemoved = false;
+	bool hadStarted = false;
+	bool removeFlag = false;
 protected:
 	SceneObject* sceneObject;
 	Engine* engine;
+
 public:
-	bool enabled = true;
 	// Validates a behaviour by assigning an owner scene object to it
 	void ValidateBehaviour(SceneObject* sceneObject);
 
 	void TryAwake();
+
+	void TryStart();
 
 	void TryUpdate();
 
@@ -30,6 +35,6 @@ public:
 
 	SceneObject* GetSceneObject();
 
-	void MarkToRemove() { shouldBeRemoved = true; }
-	bool GetRemoveMark() const { return shouldBeRemoved; }
+	void MarkToRemove() { removeFlag = true; }
+	bool GetRemoveFlag() const { return removeFlag; }
 };

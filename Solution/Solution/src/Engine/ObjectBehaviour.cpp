@@ -10,27 +10,38 @@ void ObjectBehaviour::ValidateBehaviour(SceneObject* sceneObject)
 
 void ObjectBehaviour::TryAwake()
 {
-	if (shouldBeRemoved)
+	if (removeFlag)
 		return;
 
 	if (enabled && !hasAwoken)
 	{
 		hasAwoken = true;
 		Awake();
+	}
+}
+
+void ObjectBehaviour::TryStart()
+{
+	if (removeFlag)
+		return;
+
+	if (enabled && !hadStarted)
+	{
+		hadStarted = true;
 		Start();
 	}
 }
 
 void ObjectBehaviour::TryUpdate()
 {
-	if (!enabled || shouldBeRemoved)
+	if (!enabled || removeFlag)
 		return;
 	Update();
 }
 
 void ObjectBehaviour::TryLateUpdate()
 {
-	if (!enabled || shouldBeRemoved)
+	if (!enabled || removeFlag)
 		return;
 	LateUpdate();
 }

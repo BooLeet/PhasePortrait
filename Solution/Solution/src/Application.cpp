@@ -27,9 +27,7 @@ using namespace std::chrono;
 #include "Engine/Engine.h"
 #include "Engine/Scene.h"
 #include "Engine/SceneObject.h"
-#include "Engine/ColoredCubeRenderer.h"
-#include "TrailRenderer.h"
-#include "PhaseFlow.h"
+#include "PhasePortrait.h"
 #include "DifferentialEquation.h"
 
 std::tuple<size_t, size_t, bool> ReadWindowSize(std::string fileName = "windowConfig.txt");
@@ -42,7 +40,7 @@ int main(void)
 	Engine engine = Engine(std::get<0>(windowSize), std::get<1>(windowSize), std::get<2>(windowSize));
 
 	SceneObject* phaseFlowObj = engine.GetScene()->CreateObject("PhaseFlow");
-	PhaseFlow* phaseFlow = phaseFlowObj->AddBehaviour<PhaseFlow>();
+	PhasePortrait* phaseFlow = phaseFlowObj->AddBehaviour<PhasePortrait>();
 
 	
 	engine.MainLoop();

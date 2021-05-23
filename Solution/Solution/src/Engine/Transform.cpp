@@ -108,5 +108,5 @@ mat4 Transform::GetModelMatrix() const
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0), position);
 	glm::mat4 rotationMatrix = GetRotationMatrix();
 	glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0), scale);
-	return translationMatrix * rotationMatrix * scaleMatrix; //glm::lookAt(GetPosition(), GetPosition() + GetForward(), GetUp());
+	return translationMatrix * rotationMatrix * scaleMatrix;
 }

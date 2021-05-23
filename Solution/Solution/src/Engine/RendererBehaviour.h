@@ -14,7 +14,7 @@ public:
 
 	virtual void Render(mat4 projectionViewMatrix) = 0;
 
-	void Awake();
+	void Awake() final;
 
 	void OnDestroy() final;
 };

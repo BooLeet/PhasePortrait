@@ -11,19 +11,7 @@ SceneObject* Scene::CreateObject(std::string name)
 	return obj;
 }
 
-// Finds and removes an object from the scene
-//void Scene::DestroyObject(SceneObject* obj)
-//{
-//	auto iterator = std::find(sceneObjects.begin(), sceneObjects.end(), obj);
-//	if (iterator == sceneObjects.end())
-//		return;
-//
-//	delete *iterator;
-//	
-//	std::iter_swap(iterator, sceneObjects.end() - 1);
-//	sceneObjects.pop_back();
-//}
-
+// Updates all objects or removes the ones with the destruction flag
 void Scene::UpdateAllObjects()
 {
 	size_t destroyedObjects = 0;
@@ -38,13 +26,8 @@ void Scene::UpdateAllObjects()
 			destroyedObjects++;
 		}
 		else
-		{
 			sceneObjects[i]->UpdateBehaviours();
-		}
 	}
-
-	/*for (SceneObject* obj : sceneObjects)
-		obj->UpdateBehaviours();*/
 }
 
 size_t Scene::GetObjectCount() const

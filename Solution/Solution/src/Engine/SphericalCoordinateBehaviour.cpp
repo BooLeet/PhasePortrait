@@ -24,8 +24,8 @@ void SphericalCoordinateBehaviour::LateUpdate()
 		distance * cos(angleU) * cos(angleV));
 	position = position + pivot;
 
-	sceneObject->transform.SetPosition(position);
-	sceneObject->transform.SetRotation(rotation);
+	sceneObject->GetTransform().SetPosition(position);
+	sceneObject->GetTransform().SetRotation(rotation);
 }
 
 void SphericalCoordinateBehaviour::Reset(float newDistance)

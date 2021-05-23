@@ -14,6 +14,7 @@ private:
 	vec3 rotation;
 	vec3 scale;
 
+private:
 	void UpdateDirectionVectors();
 public:
 	Transform(const vec3& position = vec3(0), const vec3& rotation = vec3(0), const vec3& scale = vec3(1));

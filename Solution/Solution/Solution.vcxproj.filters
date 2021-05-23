@@ -39,25 +39,16 @@
     <ClCompile Include="src\Engine\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\ColoredCubeRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\SphericalCoordinateBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TrailRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\ShaderLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PhaseFlow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ExpressionCalculator.cpp">
@@ -84,6 +75,9 @@
     <ClCompile Include="src\Engine\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PhasePortrait.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Scene.h">
@@ -107,9 +101,6 @@
     <ClInclude Include="src\Engine\RendererBehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\ColoredCubeRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\ShaderLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -122,16 +113,10 @@
     <ClInclude Include="src\Engine\EngineLibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TrailRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\OpenGLComponents.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PhaseFlow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ExpressionCalculator.h">
@@ -174,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhasePortrait.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
