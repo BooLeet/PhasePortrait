@@ -2,19 +2,19 @@
 #include <vector>
 
 template<typename T>
-class Vector
+class VectorWrap
 {
 public:
 	std::vector<T> rawData;
 
-	Vector(size_t size = 0,double fillVal = 0) : rawData(std::vector<T>(size, fillVal)){}
+	VectorWrap(size_t size = 0,double fillVal = 0) : rawData(std::vector<T>(size, fillVal)){}
 
-	Vector(const std::vector<T>& data) { rawData = data; }
+	VectorWrap(const std::vector<T>& data) { rawData = data; }
 
-	Vector operator+(const Vector<T>& rhs) const
+	VectorWrap operator+(const VectorWrap<T>& rhs) const
 	{
 		size_t size = max(Size(), rhs.Size());
-		Vector result = Vector(size);
+		VectorWrap result = VectorWrap(size);
 
 		for (size_t i = 0; i < size; ++i)
 			result.rawData[i] = (*this)[i] + rhs[i];
@@ -22,10 +22,10 @@ public:
 		return result;
 	}
 
-	Vector operator-(const Vector<T>& rhs) const
+	VectorWrap operator-(const VectorWrap<T>& rhs) const
 	{
 		size_t size = max(Size(), rhs.Size());
-		Vector result = Vector(size);
+		VectorWrap result = VectorWrap(size);
 
 		for (size_t i = 0; i < size; ++i)
 			result.rawData[i] = (*this)[i] - rhs[i];
@@ -33,16 +33,16 @@ public:
 		return result;
 	}
 
-	Vector operator*(T rhs) const
+	VectorWrap operator*(T rhs) const
 	{
-		Vector result = Vector(rawData.size());
+		VectorWrap result = VectorWrap(rawData.size());
 		for (size_t i = 0; i < rawData.size(); ++i)
 			result.rawData[i] = rawData[i] * rhs;
 
 		return result;
 	}
 
-	friend Vector operator*(double lhs, const Vector& rhs)
+	friend VectorWrap operator*(double lhs, const VectorWrap& rhs)
 	{
 		return rhs * lhs;
 	}

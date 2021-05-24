@@ -74,7 +74,22 @@ void PhasePortrait::PresetsSetup()
 	presetSystems.push_back(SystemPreset({ "0-a*var(0)-4*var(1)-4*var(2)-var(1)^2",
 											"0-a*var(1)-4*var(2)-4*var(0)-var(2)^2",
 											"0-a*var(2)-4*var(0)-4*var(1)-var(0)^2" },
-		"a = 1.89", "Halvorsen"));
+		"a = 1.89", "Halvorsen Attractor"));
+
+	presetSystems.push_back(SystemPreset({ "var(1)+a*var(0)*var(1)+var(0)*var(2)",
+											"1-b*var(0)^2+var(1)*var(2)",
+											"var(0)-var(0)^2-var(1)^2" },
+		"a = 2.07\nb = 1.79", "Sprott Attractor"));
+
+	presetSystems.push_back(SystemPreset({ "a*var(0)+var(1)*var(2)",
+											"b*var(0)-c*var(1)-var(0)*var(2)",
+											"0-var(2)-var(0)*var(1)" },
+		"a = 0.2\nb = 0.01\nc = 0.4", "Four-Wing Attractor"));
+
+	presetSystems.push_back(SystemPreset({ "sin(var(1))-b*var(0)",
+											"sin(var(2))-b*var(1)",
+											"sin(var(0))-b*var(2)" },
+		"b = 0.208186", "Thomas Attractor"));
 }
 
 void PhasePortrait::SetDifferentialEquation(DifferentialEquation* differentialEquationReference)
@@ -103,7 +118,7 @@ void PhasePortrait::SetSystemOfODEs(const std::vector<std::vector<char>>& system
 
 #pragma region Phase Trajectory Creation
 
-float PhasePortrait::CalculateDifferentialEquation(double t, const Vector<float>& point)
+float PhasePortrait::CalculateDifferentialEquation(double t, const VectorWrap<float>& point)
 {
 	currentPointForCalculation = point;
 	differentialEquation->rightSideExpression.SetVariable("t", t);
@@ -116,23 +131,24 @@ float PhasePortrait::CalculateDifferentialEquation(double t, const Vector<float>
 	return 0;
 }
 
-std::vector< Vector<float>> PhasePortrait::SolveRungeKutta(function<Vector<float>(double,const Vector<float>&)> f, const vector<float>& yStart, double tStart, double tEnd, double tStep)
+vector< VectorWrap<float>> PhasePortrait::SolveRungeKutta(function<VectorWrap<float>(double,const VectorWrap<float>&)> f, const vector<float>& yStart, double tStart, double tEnd, double tStep)
 {
 	if (tStart > tEnd)
 		std::swap(tStart, tEnd);
+
 	size_t steps = std::ceil((tEnd - tStart) / tStep);
 
 	double tPrev = tStart;
-	Vector<float> yPrev = yStart;
-	std::vector< Vector<float>> result;
+	VectorWrap<float> yPrev = yStart;
+	std::vector< VectorWrap<float>> result;
 	result.push_back(yPrev);
 
 	for (size_t i = 1; i <= steps; ++i)
 	{
-		Vector<float> K1 = tStep * f(tPrev, yPrev);
-		Vector<float> K2 = tStep * f(tPrev + tStep / 2, yPrev + K1 * 0.5);
-		Vector<float> K3 = tStep * f(tPrev + tStep / 2, yPrev + K2 * 0.5);
-		Vector<float> K4 = tStep * f(tPrev + tStep, yPrev + K3);
+		VectorWrap<float> K1 = tStep * f(tPrev, yPrev);
+		VectorWrap<float> K2 = tStep * f(tPrev + tStep / 2, yPrev + K1 * 0.5);
+		VectorWrap<float> K3 = tStep * f(tPrev + tStep / 2, yPrev + K2 * 0.5);
+		VectorWrap<float> K4 = tStep * f(tPrev + tStep, yPrev + K3);
 
 		yPrev = yPrev + (K1 + 2 * K2 + 2 * K3 + K4) * (1 / 6.0);
 		tPrev += tStep;
@@ -144,25 +160,27 @@ std::vector< Vector<float>> PhasePortrait::SolveRungeKutta(function<Vector<float
 
 void PhasePortrait::CreatePhaseTrajectories()
 {
+	// Удаление предыдущих точек
 	ClearPhaseTrajectories();
 
+	// Порядок уравнения / размер системы
 	size_t order = (differentialEquation == nullptr) ? systemOfODEs.size() : differentialEquation->GetOrder();
 
-	size_t samplePerDimension = sampleSize;
+	// Определение количества итераций циклов
+	size_t pointsPerDimension = sampleSize;
 	if (order == 2)
-		samplePerDimension = sqrt(sampleSize);
+		pointsPerDimension = sqrt(sampleSize);
 	else if (order >= 3)
-		samplePerDimension = cbrt(sampleSize);
+		pointsPerDimension = cbrt(sampleSize);
 
-	size_t iSize = order >= 1 ? samplePerDimension : 0;
-	size_t jSize = order >= 2 ? samplePerDimension : 1;
-	size_t kSize = order >= 3 ? samplePerDimension : 1;
+	size_t iSize = order >= 1 ? pointsPerDimension : 0;
+	size_t jSize = order >= 2 ? pointsPerDimension : 1;
+	size_t kSize = order >= 3 ? pointsPerDimension : 1;
 
-	// Возвращает вектор скорости для данной фазовой точки
-	function<Vector<float>(double, const Vector<float>&)> F;
+	// Вектор-функция фазовой скорости
+	function<VectorWrap<float>(double, const VectorWrap<float>&)> F;
 	if (differentialEquation != nullptr)
-	{
-		F = [this](double t, const Vector<float>& point)
+		F = [this](double t, const VectorWrap<float>& point)
 		{
 			std::vector<float> result(differentialEquation->GetOrder());
 
@@ -173,38 +191,40 @@ void PhasePortrait::CreatePhaseTrajectories()
 
 			return result;
 		};
-	}
 	else
-	{
-		F = [this](double t, const Vector<float>& point)
+		F = [this](double t, const VectorWrap<float>& point)
 		{
-			std::vector<float> result(systemOfODEs.size());
+			vector<float> result(systemOfODEs.size());
 			currentPointForCalculation = point;
 			for (size_t i = 0; i < systemOfODEs.size(); ++i)
 			{
+				systemOfODEs[i].SetVariable("t", t);
 				result[i] = systemOfODEs[i].EvaluateExpression(calculatorFunctions);
 			}
 
 			return result;
 		};
-	}
 
+	// Создание начальных точек и вычисление фазовых траекторий
 	for (size_t i = 0; i < iSize; ++i)
 		for (size_t j = 0; j < jSize; ++j)
 			for (size_t k = 0; k < kSize; ++k)
 			{
-				std::vector<float> phasePosition(sliceValues);
+				// Создание новой точки и заполнение значений переменных/производных, не уместившихся на координатных осях
+				vector<float> phasePosition(sliceValues);
 
+				// Заполнение координат в виде квадрата / куба с центром в точке 0
 				if (order > xDiffOrder)
-					phasePosition[xDiffOrder] = 2 * simulationRadius * (i / (float)(samplePerDimension - 1) - 0.5);
+					phasePosition[xDiffOrder] = 2 * simulationRadius * (i / (float)(pointsPerDimension - 1) - 0.5);
 
 				if (order > yDiffOrder)
-					phasePosition[yDiffOrder] = 2 * simulationRadius * (j / (float)(samplePerDimension - 1) - 0.5);
+					phasePosition[yDiffOrder] = 2 * simulationRadius * (j / (float)(pointsPerDimension - 1) - 0.5);
 
 				if (order > zDiffOrder)
-					phasePosition[zDiffOrder] = 2 * simulationRadius * (k / (float)(samplePerDimension - 1) - 0.5);
+					phasePosition[zDiffOrder] = 2 * simulationRadius * (k / (float)(pointsPerDimension - 1) - 0.5);
 
-				std::vector< Vector<float>> phaseTrajectory = SolveRungeKutta(F, phasePosition, simulationStartTimeVolatile, simulationEndTimeVolatile, simulationTimeStepVolatile);
+				// вычисление фазовых траекторий методом Рунге Кутта
+				vector< VectorWrap<float>> phaseTrajectory = SolveRungeKutta(F, phasePosition, simulationStartTimeVolatile, simulationEndTimeVolatile, simulationTimeStepVolatile);
 				phaseTrajectories.push_back(phaseTrajectory);
 			}
 
@@ -236,7 +256,7 @@ vec3 PhasePortrait::GetTrajectoryColor(float parameter)
 	}
 }
 
-vec3 PhasePortrait::GetTrailPosition(const Vector<float>& phasePosition)
+vec3 PhasePortrait::GetTrailPosition(const VectorWrap<float>& phasePosition)
 {
 	size_t order = (differentialEquation == nullptr) ? systemOfODEs.size() : differentialEquation->GetOrder();
 	vec3 result = vec3(0);
@@ -255,7 +275,7 @@ vec3 PhasePortrait::GetTrailPosition(const Vector<float>& phasePosition)
 void PhasePortrait::Render(mat4 projectionViewMatrix)
 {
 	float fullTime = simulationEndTime - simulationStartTime;
-	for (std::vector< Vector<float>>& trajectory : phaseTrajectories)
+	for (std::vector< VectorWrap<float>>& trajectory : phaseTrajectories)
 	{
 		std::vector<GLfloat> vertexData;
 		std::vector<GLfloat> colorData;
@@ -508,7 +528,7 @@ void PhasePortrait::SystemSettingUI()
 	{
 		for (size_t i = 0; i < systemSize; ++i)
 			if (i != xDiffOrder && i != yDiffOrder && i != zDiffOrder)
-				ImGui::InputFloat((to_string(i) + " order derivative value").c_str(), &(sliceValues[i]));
+				ImGui::InputFloat(("var(" + to_string(i) + ") value").c_str(), &(sliceValues[i]));
 	}
 
 	if (ImGui::Button("Confirm System"))

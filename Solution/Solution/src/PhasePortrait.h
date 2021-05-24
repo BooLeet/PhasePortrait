@@ -43,12 +43,12 @@ class PhasePortrait : public RendererBehaviour
 	class PhasePointContainer
 	{
 	public:
-		std::vector< Vector<float>> trajectory;
+		std::vector< VectorWrap<float>> trajectory;
 
-		PhasePointContainer(std::vector< Vector<float>> phaseTrajectory) :  trajectory(phaseTrajectory) {}
+		PhasePointContainer(std::vector< VectorWrap<float>> phaseTrajectory) :  trajectory(phaseTrajectory) {}
 	};
 
-	std::vector<std::vector< Vector<float>>> phaseTrajectories;
+	std::vector<std::vector< VectorWrap<float>>> phaseTrajectories;
 	//std::vector<std::pair<TrailRenderer*, std::vector<float> >> phasePoints;
 	
 	size_t xDiffOrder = 0;
@@ -57,7 +57,7 @@ class PhasePortrait : public RendererBehaviour
 	std::vector<float> sliceValues;
 
 	std::map<std::string, calcFunction > calculatorFunctions;
-	Vector<float> currentPointForCalculation;
+	VectorWrap<float> currentPointForCalculation;
 
 	DifferentialEquation* differentialEquation = nullptr;
 	std::vector<Expression> systemOfODEs;
@@ -71,7 +71,7 @@ class PhasePortrait : public RendererBehaviour
 	void SetSystemOfODEs(const std::vector<std::vector<char>>& system, char* variables);
 
 	// Вычисляет правую часть дифференциального уравнения для данной фазовой точки
-	float CalculateDifferentialEquation(double t, const Vector<float>& point);
+	float CalculateDifferentialEquation(double t, const VectorWrap<float>& point);
 
 	// Вносит необходимые функции для вычисления уравнений
 	void CalculatorFunctionSetup();
@@ -80,10 +80,10 @@ class PhasePortrait : public RendererBehaviour
 	void PresetsSetup();
 
 	// Возвращает значения решения задачи Коши 
-	std::vector< Vector<float>> SolveRungeKutta(function<Vector<float>(double, const Vector<float>&)> f, const vector<float>& yStart, double tStart, double tEnd, double tStep);
+	std::vector< VectorWrap<float>> SolveRungeKutta(function<VectorWrap<float>(double, const VectorWrap<float>&)> f, const vector<float>& yStart, double tStart, double tEnd, double tStep);
 
 	// Возвращает новую позицию точки в зависимости от выбранных фазовых осей визуализации
-	vec3 GetTrailPosition(const Vector<float>& phasePosition);
+	vec3 GetTrailPosition(const VectorWrap<float>& phasePosition);
 	
 	// Удаляет предыдущие фазовые точки (если имеются) и создает новые
 	void CreatePhaseTrajectories();
