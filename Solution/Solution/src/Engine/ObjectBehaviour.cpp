@@ -46,7 +46,12 @@ void ObjectBehaviour::TryLateUpdate()
 	LateUpdate();
 }
 
-SceneObject* ObjectBehaviour::GetSceneObject()
+SceneObject* ObjectBehaviour::GetSceneObject() const
 {
 	return sceneObject;
+}
+
+Engine* ObjectBehaviour::GetEngine() const
+{
+	return engine;
 }

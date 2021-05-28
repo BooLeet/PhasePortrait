@@ -5,73 +5,26 @@
 #include "Vector.h"
 #include <vector>
 #include "Engine/Shader.h"
+//#include "PhasePortraitStates.h"
 
 using namespace std;
+
 
 class DifferentialEquation;
 class CoordinateSystemRenderer;
 class SphericalCoordinateBehaviour;
+class PhasePortraitState;
 
 class PhasePortrait : public RendererBehaviour
 {
-	bool startSimulation = false;
-	bool stopSimulation = false;
-
-	size_t sampleSize = 1000;
-	float simulationSpeed = 1;
-
-	float simulationRadius = 10;
-	float simulationStartTimeVolatile = 0;
-	float simulationEndTimeVolatile = 10;
-	float simulationTimeStepVolatile = 0.1;
-
-	float simulationTimeCounter = 0;
-
-	float simulationStartTime = 0;
-	float simulationEndTime = 0;
-	float simulationTimeStep = 0;
-
-	float trajectoryMaxLength = 10;
-	float trajectoryMinEdgeLength = 0.001;
-
-	enum class TrajectoryColorMode { SingleColor, TwoColor, Rainbow };
-	TrajectoryColorMode currentColorMode = TrajectoryColorMode::TwoColor;
-
-	vec3 trajectoryFirstColor = vec3(1, 0, 0);
-	vec3 trajectorySecondColor = vec3(0, 0, 1);
-
-	class PhasePointContainer
-	{
-	public:
-		std::vector< VectorWrap<float>> trajectory;
-
-		PhasePointContainer(std::vector< VectorWrap<float>> phaseTrajectory) :  trajectory(phaseTrajectory) {}
-	};
-
-	std::vector<std::vector< VectorWrap<float>>> phaseTrajectories;
-	//std::vector<std::pair<TrailRenderer*, std::vector<float> >> phasePoints;
+	PhasePortraitState* currentState;
 	
-	size_t xDiffOrder = 0;
-	size_t yDiffOrder = 1;
-	size_t zDiffOrder = 2;
-	std::vector<float> sliceValues;
-
+	float simulationTimeStep = 0;
+	std::vector<std::vector< vec3>> phaseTrajectories;
 	std::map<std::string, calcFunction > calculatorFunctions;
-	VectorWrap<float> currentPointForCalculation;
-
-	DifferentialEquation* differentialEquation = nullptr;
-	std::vector<Expression> systemOfODEs;
-
-	CoordinateSystemRenderer* coordinateRenderer = nullptr;
-	SphericalCoordinateBehaviour* cameraHolder = nullptr;
-
-	// Задание дифференциального уравнения
-	void SetDifferentialEquation(DifferentialEquation* differentialEquationReference);
-
-	void SetSystemOfODEs(const std::vector<std::vector<char>>& system, char* variables);
-
+	
 	// Вычисляет правую часть дифференциального уравнения для данной фазовой точки
-	float CalculateDifferentialEquation(double t, const VectorWrap<float>& point);
+	float CalculateDifferentialEquation(DifferentialEquation* equation, double t, const VectorWrap<float>& point);
 
 	// Вносит необходимые функции для вычисления уравнений
 	void CalculatorFunctionSetup();
@@ -82,64 +35,50 @@ class PhasePortrait : public RendererBehaviour
 	// Возвращает значения решения задачи Коши 
 	std::vector< VectorWrap<float>> SolveRungeKutta(function<VectorWrap<float>(double, const VectorWrap<float>&)> f, const vector<float>& yStart, double tStart, double tEnd, double tStep);
 
-	// Возвращает новую позицию точки в зависимости от выбранных фазовых осей визуализации
-	vec3 GetTrailPosition(const VectorWrap<float>& phasePosition);
-	
-	// Удаляет предыдущие фазовые точки (если имеются) и создает новые
-	void CreatePhaseTrajectories();
-
-	// Удаляет предыдущие фазовые точки
-	void ClearPhaseTrajectories();
-
 	vec3 GetTrajectoryColor(float parameter);
 
 public:
-	
+	float simulationTimeCounter = 0;
 
-	void Start();
-	void Update();
+	float simulationStartTime = 0;
+	float simulationEndTime = 0;
 
-	void Render(mat4 projectionViewMatrix);
-
-	void OnDestroyRenderer();
-
-	
-
-private:
-	enum class UIState
+	class TrajectorySettings
 	{
-		EquationSetting,SystemSetting,Simulation,StartingMenu
+	public:
+		float maxLength = 10;
+		float minEdgeLength = 0.001;
+
+		enum class ColorMode { SingleColor, TwoColor, Rainbow };
+		ColorMode currentColorMode = ColorMode::TwoColor;
+
+		vec3 firstColor = vec3(1, 0, 0);
+		vec3 secondColor = vec3(0, 0, 1);
 	};
+	VectorWrap<float> currentPointForCalculation;
 
-	UIState currentUIState = UIState::StartingMenu;
+	TrajectorySettings trajectorySettings;
 
-	// ODE
-	char* equationInput = new char[100]();
-	char* variablesInput = new char[100]();
-	int diffEqOrder = 2;
-	std::string equationErrorMessage;
+	SphericalCoordinateBehaviour* cameraHolder = nullptr;
+	CoordinateSystemRenderer* axisRenderer = nullptr;
 
 	struct DifferentialEquationPreset
 	{
 		size_t order;
 		std::string equationInput;
-		std::string variablesInput;
+		std::string constantsInput;
 		std::string equationName;
 
-		DifferentialEquationPreset(size_t equationOrder, const std::string& equation, const std::string& variables, const std::string& name) : order(equationOrder), equationInput(equation), variablesInput(variables), equationName(name) {}
+		DifferentialEquationPreset(size_t equationOrder, const std::string& equation, const std::string& variables, const std::string& name) : order(equationOrder), equationInput(equation), constantsInput(variables), equationName(name) {}
 	};
-	std::vector<DifferentialEquationPreset> presetEquations;
 
-	// System of ODEs
-	int systemSize = 2;
-	std::vector<std::vector<char>> systemInput;
 	struct SystemPreset
 	{
 		std::vector<std::vector<char>> systemInput;
 		std::string systemName;
-		std::string variablesInput;
+		std::string constantsInput;
 
-		SystemPreset(const std::vector<std::string> equationInput, const std::string& variables, const std::string& name) : systemName(name), variablesInput(variables)
+		SystemPreset(const std::vector<std::string> equationInput, const std::string& constants, const std::string& name) : systemName(name), constantsInput(constants)
 		{
 			systemInput.reserve(equationInput.size());
 			for (size_t i = 0; i < equationInput.size(); ++i)
@@ -150,15 +89,31 @@ private:
 			}
 		}
 	};
+
+
+	std::vector<DifferentialEquationPreset> presetEquations;
 	std::vector<SystemPreset> presetSystems;
 
-	void HandleUI();
+	// Удаляет предыдущие фазовые точки (если имеются) и создает новые
+	void CreatePhaseTrajectories(function<VectorWrap<float>(double, const VectorWrap<float>&)> speedFunction, size_t dimensionCount, size_t sampleSize, float simulationRadius, float startTime, float endTime, float timeStep, size_t xOrder, size_t yOrder, size_t zOrder, const vector<float>& sliceValues);
 
-	void EquationSettingUI();
+	// Удаляет предыдущие фазовые точки
+	void ClearPhaseTrajectories();
 
-	void SystemSettingUI();
+	// Sets time scale to 1
+	void ResetTimeSpeed();
 
-	void SimulationWindowUI();
+	// Sets time scale to 0
+	void Pause();
 
-	void StartingMenuUI();
+	function<VectorWrap<float>(double, const VectorWrap<float>&)> GetF(DifferentialEquation* equation);
+	function<VectorWrap<float>(double, const VectorWrap<float>&)> GetF(std::vector<Expression>* systemOfODEs);
+
+
+	void Start();
+	void Update();
+
+	void Render(mat4 projectionViewMatrix);
+
+	void OnDestroyRenderer();
 };

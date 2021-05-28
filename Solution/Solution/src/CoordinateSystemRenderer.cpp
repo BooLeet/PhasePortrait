@@ -4,7 +4,7 @@
 
 void CoordinateSystemRenderer::Render(mat4 projectionViewMatrix)
 {
-	mesh->Render(projectionViewMatrix, sceneObject->GetTransform().GetModelMatrix());
+	mesh->Render(projectionViewMatrix, GetSceneObject()->GetTransform().GetModelMatrix());
 }
 
 void CoordinateSystemRenderer::Start()
@@ -172,5 +172,5 @@ void CoordinateSystemRenderer::CreateMesh()
 			}
 		}
 	}
-	mesh = new Mesh(vertexData, colorData, engine->GetDefaultShader().GetProgram(), GL_LINES);
+	mesh = new Mesh(vertexData, colorData, GetEngine()->GetDefaultShader().GetProgram(), GL_LINES);
 }

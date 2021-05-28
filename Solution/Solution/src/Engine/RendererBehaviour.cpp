@@ -9,11 +9,11 @@ void RendererBehaviour::TryRender(mat4 projectionViewMatrix)
 
 void RendererBehaviour::Awake()
 {
-	engine->rendererRegistry.RegisterRenderer(this);
+	GetEngine()->rendererRegistry.RegisterRenderer(this);
 }
 
 void RendererBehaviour::OnDestroy()
 {
 	OnDestroyRenderer();
-	engine->rendererRegistry.UnregisterRenderer(this);
+	GetEngine()->rendererRegistry.UnregisterRenderer(this);
 }

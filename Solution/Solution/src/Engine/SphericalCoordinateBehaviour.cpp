@@ -24,8 +24,8 @@ void SphericalCoordinateBehaviour::LateUpdate()
 		distance * cos(angleU) * cos(angleV));
 	position = position + pivot;
 
-	sceneObject->GetTransform().SetPosition(position);
-	sceneObject->GetTransform().SetRotation(rotation);
+	GetSceneObject()->GetTransform().SetPosition(position);
+	GetSceneObject()->GetTransform().SetRotation(rotation);
 }
 
 void SphericalCoordinateBehaviour::Reset(float newDistance)
@@ -36,30 +36,30 @@ void SphericalCoordinateBehaviour::Reset(float newDistance)
 
 void SphericalCoordinateBehaviour::HandleInput()
 {
-	if (engine->GetInput()->GetKey(GLFW_KEY_RIGHT))
-		angleU += engine->GetUnscaledDeltaTime();
-	if (engine->GetInput()->GetKey(GLFW_KEY_LEFT))
-		angleU -= engine->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_RIGHT))
+		angleU += GetEngine()->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_LEFT))
+		angleU -= GetEngine()->GetUnscaledDeltaTime();
 
-	if (engine->GetInput()->GetKey(GLFW_KEY_E))
-		angleW -= engine->GetUnscaledDeltaTime();
-	if (engine->GetInput()->GetKey(GLFW_KEY_Q))
-		angleW += engine->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_E))
+		angleW -= GetEngine()->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_Q))
+		angleW += GetEngine()->GetUnscaledDeltaTime();
 
-	if (engine->GetInput()->GetKey(GLFW_KEY_UP))
-		angleV += engine->GetUnscaledDeltaTime();
-	if (engine->GetInput()->GetKey(GLFW_KEY_DOWN))
-		angleV -= engine->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_UP))
+		angleV += GetEngine()->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_DOWN))
+		angleV -= GetEngine()->GetUnscaledDeltaTime();
 
 	if (abs(angleV) >= pi<float>() / 2)
 		angleV = sign(angleV) * pi<float>() / 2;
 
 	double currentZoomSpeed = zoomSpeed;
-	if (engine->GetInput()->GetKey(GLFW_KEY_LEFT_SHIFT))
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_LEFT_SHIFT))
 		currentZoomSpeed *= 5;
 
-	if (engine->GetInput()->GetKey(GLFW_KEY_W))
-		distance -= currentZoomSpeed * engine->GetUnscaledDeltaTime();
-	if (engine->GetInput()->GetKey(GLFW_KEY_S))
-		distance += currentZoomSpeed * engine->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_W))
+		distance -= currentZoomSpeed * GetEngine()->GetUnscaledDeltaTime();
+	if (GetEngine()->GetInput()->GetKey(GLFW_KEY_S))
+		distance += currentZoomSpeed * GetEngine()->GetUnscaledDeltaTime();
 }

@@ -8,22 +8,22 @@
 
 void CameraBehaviour::Awake()
 {
-	engine->cameraRegistry.RegisterCamera(this);
+	GetEngine()->cameraRegistry.RegisterCamera(this);
 }
 
 void CameraBehaviour::OnDestroy()
 {
-	engine->cameraRegistry.UnregisterCamera(this);
+	GetEngine()->cameraRegistry.UnregisterCamera(this);
 }
 
 mat4 CameraBehaviour::GetProjectionViewMatrix() const
 {
-	size_t width = engine->GetWindowWidth();
-	size_t height = engine->GetWindowHeight();
+	size_t width = GetEngine()->GetWindowWidth();
+	size_t height = GetEngine()->GetWindowHeight();
 	glm::mat4 Projection = glm::perspective(glm::radians(fieldOfView), width / (float)height, nearPlane, farPlane);
 
-	glm::mat4 rotationMatrix = sceneObject->GetTransform().GetRotationMatrix();
+	glm::mat4 rotationMatrix = GetSceneObject()->GetTransform().GetRotationMatrix();
 	glm::mat4 View = glm::inverse(rotationMatrix);
-	glm::mat4 World = glm::translate(glm::mat4(1.0), -(sceneObject->GetTransform().GetPosition()));
+	glm::mat4 World = glm::translate(glm::mat4(1.0), -(GetSceneObject()->GetTransform().GetPosition()));
 	return Projection * View * World;
 }

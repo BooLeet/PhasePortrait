@@ -11,10 +11,9 @@ private:
 	bool hasAwoken = false;
 	bool hadStarted = false;
 	bool removeFlag = false;
-protected:
+
 	SceneObject* sceneObject;
 	Engine* engine;
-
 public:
 	// Validates a behaviour by assigning an owner scene object to it
 	void ValidateBehaviour(SceneObject* sceneObject);
@@ -33,7 +32,8 @@ public:
 	void virtual LateUpdate() {};
 	void virtual OnDestroy() {};
 
-	SceneObject* GetSceneObject();
+	SceneObject* GetSceneObject() const;
+	Engine* GetEngine() const;
 
 	void MarkToRemove() { removeFlag = true; }
 	bool GetRemoveFlag() const { return removeFlag; }
